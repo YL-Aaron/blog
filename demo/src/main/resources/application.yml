@@ -1,0 +1,18 @@
+server:
+  port: 8000
+  ssl:
+    key-store: server.keystore
+    key-alias: tomcat
+    key-store-password: 123456
+    key-store-type: JKS
+    enabled: true
+
+netty:
+  port: 7000
+  url: localhost
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
