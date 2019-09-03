@@ -58,12 +58,11 @@ public class ShiroConfiguration {
     public ShiroFilterFactoryBean shiroFilter(SecurityManager manager) {
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
         bean.setSecurityManager(manager);
-        bean.setLoginUrl("/loginUser");
+        bean.setLoginUrl("/login");
         bean.setSuccessUrl("/index");
-
         LinkedHashMap<String, String> filter = new LinkedHashMap<>();
         filter.put("/index", "authc");
-        filter.put("/login", "anon");
+        filter.put("/loginUser", "anon");
         filter.put("/css/**", "anon");
         filter.put("/fonts/**", "anon");
         filter.put("/images/**", "anon");
