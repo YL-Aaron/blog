@@ -18,30 +18,6 @@ import java.util.LinkedHashMap;
 @Configuration
 public class ShiroConfiguration {
 
-    /*@Bean
-    public HashedCredentialsMatcher hashedCredentialsMatcher() {
-        HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
-        credentialsMatcher.setHashAlgorithmName("MD5");
-        credentialsMatcher.setHashIterations(1);
-        credentialsMatcher.setStoredCredentialsHexEncoded(true);
-        return credentialsMatcher;
-    }
-
-    @Bean
-    public AuthRealm authRealm() {
-        AuthRealm authRealm = new AuthRealm();
-        authRealm.setAuthorizationCachingEnabled(false);
-        authRealm.setCredentialsMatcher(hashedCredentialsMatcher());
-        return authRealm;
-    }
-
-    @Bean
-    public SecurityManager securityManager() {
-        DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
-        manager.setRealm(authRealm());
-        return manager;
-    }*/
-
     @Bean
     public SecurityManager securityManager(){
         DefaultWebSecurityManager securityManager=new DefaultWebSecurityManager();
@@ -72,23 +48,4 @@ public class ShiroConfiguration {
         bean.setFilterChainDefinitionMap(filter);
         return bean;
     }
-
- /*   @Bean
-    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor(){
-        return new LifecycleBeanPostProcessor();
-    }*/
-
-    /*@Bean
-    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
-        DefaultAdvisorAutoProxyCreator creator = new DefaultAdvisorAutoProxyCreator();
-        creator.setProxyTargetClass(true);
-        return creator;
-    }
-
-    @Bean
-    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Qualifier("securityManager") SecurityManager securityManager) {
-        AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
-        advisor.setSecurityManager(securityManager);
-        return advisor;
-    }*/
 }

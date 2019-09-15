@@ -34,7 +34,6 @@
 </div>
 <script type="text/javascript">
     function compile(){
-        alert("??"+$("#content").value)
         var text = document.getElementById("content").value;
         var converter = new showdown.Converter();
         var html = converter.makeHtml(text);
