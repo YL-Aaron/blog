@@ -23,9 +23,6 @@ import javax.annotation.Resource;
 @Controller
 public class AdminController {
 
-    @Resource
-    private UserService userService;
-
     @RequestMapping("/index")
     public String index() {
         return "/index";

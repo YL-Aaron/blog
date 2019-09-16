@@ -7,7 +7,7 @@ import com.yl.bean.User;
  * @desciption
  * @date 2019/8/28
  */
-public interface UserService {
+public interface UserService extends BaseService<User>{
 
     User login(String userName);
 }
