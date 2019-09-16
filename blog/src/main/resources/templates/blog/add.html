@@ -66,10 +66,7 @@
                 });
             form.on('submit(preview)',
                 function (data) {
-                $()
-                var content=$("#desc").value();
-                var title=$("#title").value();
-                alert(content+"\t"+title);
+                    $("form").attr("action", "/blog/preview");
                 });
         }
     );
