@@ -22,8 +22,8 @@ public class User implements Serializable {
 
     private String img;
 
-    private Date createtime;
+    private Date createTime;
 
-    private Date updatetime;
+    private Date updateTime;
 
 }
