@@ -31,7 +31,7 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入内容" id="desc" name="desc" class="layui-textarea"></textarea>
+                    <textarea placeholder="请输入内容" id="content" name="content" class="layui-textarea"></textarea>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -45,7 +45,7 @@
 <script>
     layui.use(['form', 'layer', 'jquery'],
         function () {
-            $ = layui.jquery;
+            var $ = layui.jquery;
             var form = layui.form,
                 layer = layui.layer;
             //监听提交

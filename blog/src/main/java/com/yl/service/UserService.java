@@ -2,6 +2,8 @@ package com.yl.service;
 
 import com.yl.bean.User;
 
+import java.util.List;
+
 /**
  * @author yi
  * @desciption
@@ -10,4 +12,5 @@ import com.yl.bean.User;
 public interface UserService extends BaseService<User>{
 
     User login(String userName);
+    List<User> selectAll();
 }

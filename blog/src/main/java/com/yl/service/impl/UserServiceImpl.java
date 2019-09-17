@@ -6,6 +6,7 @@ import com.yl.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author yi
@@ -20,6 +21,11 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     @Resource
     public void setUserMapper(UserMapper userMapper) {
         this.baseMapper=this.userMapper = userMapper;
+    }
+
+    @Override
+    public List<User> selectAll() {
+        return userMapper.selectAll();
     }
 
     @Override

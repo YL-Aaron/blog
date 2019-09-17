@@ -3,6 +3,8 @@ package com.yl.dao;
 
 import com.yl.bean.User;
 
+import java.util.List;
+
 /**
  * @author yi
  * @desciption 用户接口
@@ -10,4 +12,5 @@ import com.yl.bean.User;
  */
 public interface UserMapper extends BaseMapper<User>{
     User login(String userName);
+    List<User> selectAll();
 }

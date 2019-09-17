@@ -11,7 +11,6 @@ import javax.annotation.Resource;
  */
 public class BaseServiceImpl<T> implements BaseService<T> {
 
-    @Resource
     protected BaseMapper<T> baseMapper;
 
     @Override

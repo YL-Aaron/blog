@@ -48,7 +48,7 @@ public class BlogController {
                 .setContent(content)
                 .setTitle(title);
         blogService.insertSelective(blog);
-        return "/blog/list";
+        return "redirect:list";
     }
 
     /**

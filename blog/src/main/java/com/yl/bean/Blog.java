@@ -19,6 +19,8 @@ public class Blog {
 
     private String title;
 
+    private Integer isShow;
+
     private String content;
 
     private Date createTime;

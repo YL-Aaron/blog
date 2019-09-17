@@ -29,4 +29,5 @@ public class BlogServiceImpl extends BaseServiceImpl<Blog> implements BlogServic
     public List<Blog> selectAll() {
         return blogMapper.selectAll();
     }
+
 }

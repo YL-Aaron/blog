@@ -12,5 +12,5 @@ import java.util.List;
  */
 public interface BlogService extends BaseService<Blog> {
 
-    public List<Blog> selectAll();
+    List<Blog> selectAll();
 }
