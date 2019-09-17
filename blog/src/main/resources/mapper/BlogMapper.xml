@@ -26,6 +26,13 @@
         from
         <include refid="Tables"/>
     </select>
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Tables"/>
+        where id = #{id,jdbcType=INTEGER}
+    </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
         select 'true' as QUERYID,
         <include refid="Base_Column_List"/>

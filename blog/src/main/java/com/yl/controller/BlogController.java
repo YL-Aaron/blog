@@ -24,7 +24,7 @@ public class BlogController {
     @RequestMapping("/list")
     public String list(Model model) {
         List<Blog> biogs = blogService.selectAll();
-        model.addAttribute("biogs", biogs);
+        model.addAttribute("blogs", biogs);
         return "/blog/list";
     }
 
@@ -65,5 +65,42 @@ public class BlogController {
         model.addAttribute("title", title);
         model.addAttribute("content", content);
         return "/blog/preview";
+    }
+
+    /**
+     * 编辑文章
+     *
+     * @param id
+     * @param model
+     * @return java.lang.String
+     * @author YL
+     * @date 2019/9/17 16:56
+     */
+    @RequestMapping("/edit")
+    public String edit(Integer id, Model model) {
+        Blog blog = blogService.selectByPrimaryKey(id);
+        model.addAttribute("blog", blog);
+        return "/blog/edit";
+    }
+
+    /**
+     * 更新博客
+     * @author YL
+     * @date 2019/9/17 17:41
+     * @param id
+     * @param title
+     * @param content
+     * @param isShow
+     * @return java.lang.String
+     */
+    @RequestMapping("/update")
+    public String update(Integer id, String title, String content,Integer isShow) {
+        Blog blog = new Blog()
+                .setId(id)
+                .setTitle(title)
+                .setContent(content)
+                .setIsShow(isShow);
+        blogService.updateByPrimaryKeySelective(blog);
+        return "redirect:list";
     }
 }

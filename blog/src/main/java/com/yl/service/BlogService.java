@@ -13,4 +13,5 @@ import java.util.List;
 public interface BlogService extends BaseService<Blog> {
 
     List<Blog> selectAll();
+    Blog selectById(Integer id);
 }

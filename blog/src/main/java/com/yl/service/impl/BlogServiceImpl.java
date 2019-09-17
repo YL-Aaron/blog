@@ -30,4 +30,8 @@ public class BlogServiceImpl extends BaseServiceImpl<Blog> implements BlogServic
         return blogMapper.selectAll();
     }
 
+    @Override
+    public Blog selectById(Integer id) {
+        return blogMapper.selectById(id);
+    }
 }

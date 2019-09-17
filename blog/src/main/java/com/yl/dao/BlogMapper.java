@@ -12,5 +12,5 @@ import java.util.List;
 public interface BlogMapper extends BaseMapper<Blog>{
 
     List<Blog> selectAll();
-
+    Blog selectById(Integer id);
 }
