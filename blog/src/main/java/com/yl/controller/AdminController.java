@@ -29,7 +29,9 @@ public class AdminController {
     }
 
     @RequestMapping("/welcome")
-    public String newArticle() {
+    public String newArticle(Model model) {
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        model.addAttribute("userName", user.getUsername());
         return "/welcome";
     }
 
@@ -39,13 +41,13 @@ public class AdminController {
     }
 
     @PostMapping("/loginUser")
-    public String loginUser(String username, String password, Model model) {
+    public String loginUser(String userName, String password, Model model) {
         try {
             password= DigestUtils.md5DigestAsHex(password.getBytes());
-            UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+            UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
-            model.addAttribute("userName",username);
+            model.addAttribute("userName",userName);
             return "index";
         } catch (AuthenticationException e) {
             e.printStackTrace();

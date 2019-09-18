@@ -4,6 +4,7 @@ import com.yl.dao.BaseMapper;
 import com.yl.service.BaseService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author YL
@@ -14,8 +15,8 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     protected BaseMapper<T> baseMapper;
 
     @Override
-    public int deleteByPrimaryKey(Integer id) {
-        return baseMapper.deleteByPrimaryKey(id);
+    public int deleteByPrimaryKeys(String[] id) {
+        return baseMapper.deleteByPrimaryKeys(id);
     }
 
     @Override

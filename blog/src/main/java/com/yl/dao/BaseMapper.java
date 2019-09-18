@@ -1,13 +1,15 @@
 package com.yl.dao;
 
 
+import java.util.List;
+
 /**
  * dao层父类
  * @author YL
  * @date 11:42 2019/9/16
  */
 public interface BaseMapper<T> {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKeys(String[] id);
 
     int insert(T record);
 

@@ -53,7 +53,7 @@
                 <div class="layui-card-header">
                     <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除
                     </button>
-                    <button class="layui-btn" onclick="xadmin.open('添加用户','/blog/add',600,400,true)"><i
+                    <button class="layui-btn" onclick="xadmin.open('添加用户','/blog/add',600,400,false)"><i
                             class="layui-icon"></i>添加
                     </button>
                 </div>
@@ -88,7 +88,7 @@
                                    href="javascript:;">
                                     <i class="layui-icon">&#xe642;</i>
                                 </a>
-                                <a title="删除" th:onclick="member_del(this,[[${blog.id}]])" href="javascript:;">
+                                <a title="删除" th:onclick="del(this,[[${blog.id}]])" href="javascript:;">
                                     <i class="layui-icon">&#xe640;</i>
                                 </a>
                             </td>
@@ -96,7 +96,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="layui-card-body ">
+                <div class="layui-card-body">
                     <div class="page">
                         <div>
                             <a class="prev" href="">&lt;&lt;</a>
@@ -117,7 +117,6 @@
     layui.use(['laydate', 'form'], function () {
         var laydate = layui.laydate;
         var form = layui.form;
-
 
         // 监听全选
         form.on('checkbox(checkall)', function (data) {
@@ -143,40 +142,25 @@
 
     });
 
-    /*用户-停用*/
-    function member_stop(obj, id) {
-        layer.confirm('确认要停用吗？', function (index) {
-
-            if ($(obj).attr('title') == '启用') {
-
-                //发异步把用户状态进行更改
-                $(obj).attr('title', '停用')
-                $(obj).find('i').html('&#xe62f;');
-
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!', {icon: 5, time: 1000});
-
-            } else {
-                $(obj).attr('title', '启用')
-                $(obj).find('i').html('&#xe601;');
-
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!', {icon: 5, time: 1000});
-            }
-
-        });
-    }
-
-    function member_del(obj, id) {
+    function del(obj, id) {
         layer.confirm('确认要删除吗？', function (index) {
-            //发异步删除数据
+            var result;
             $.ajax({
                 url: "/blog/delete",
-                type: "post",
-                dataType:"josn"
+                type: "get",
+                async: false,
+                dataType: "json",
+                data: {ids: id.toString()},
+                success: function (data) {
+                    result = data.result;
+                },
+                error: function (data) {
+                    result = "删除失败";
+                }
             });
-            $(obj).parents("tr").remove();
-            layer.msg('已删除!', {icon: 1, time: 1000});
+            layer.msg(result, {icon: 1},function () {
+                location.reload();
+            });
         });
     }
 
@@ -190,11 +174,28 @@
                 ids.push($(this).val())
             }
         });
-
-        layer.confirm('确认要删除吗？' + ids.toString(), function (index) {
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
+        if (ids.length < 1) {
+            layer.msg("请选择要删除的项", {icon: 1});
+            return;
+        }
+        layer.confirm('确认要删除吗？', function (index) {
+            var result;
+            $.ajax({
+                url: "/blog/delete",
+                type: "get",
+                async: false,
+                dataType: "json",
+                data: {ids: ids.toString()},
+                success: function (data) {
+                    result = data.result;
+                },
+                error: function (data) {
+                    result = "删除失败";
+                }
+            });
+            layer.msg(result, {icon: 1},function () {
+                location.reload();
+            });
         });
     }
 </script>

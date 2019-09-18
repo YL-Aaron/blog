@@ -42,10 +42,12 @@
         <include refid="Tables"/>
         where id = #{id,jdbcType=INTEGER}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <delete id="deleteByPrimaryKeys">
         delete from
         <include refid="Tables"/>
-        where id = #{id,jdbcType=INTEGER}
+        where id in <foreach collection="array" item="item" index="index" open="(" separator="," close=")">
+        #{item}
+    </foreach>
     </delete>
     <insert id="insert" parameterType="com.yl.bean.Blog">
         insert into
