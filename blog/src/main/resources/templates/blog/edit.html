@@ -21,11 +21,12 @@
 <body>
 <div class="layui-fluid">
     <div class="layui-row">
-        <form class="layui-form" action="/blog/update">
+        <form class="layui-form">
             <div class="layui-form-item">
                 <label class="layui-form-label">
                     <span class="x-red">*</span>标题</label>
                 <div class="layui-input-inline">
+                    <input type="hidden" th:value="${blog.id}" name="id">
                     <input type="text" id="title" name="title" required="" lay-verify="required" autocomplete="off"
                            class="layui-input" th:value="${blog.title}"></div>
             </div>
@@ -51,9 +52,23 @@
             //监听提交
             form.on('submit(save)',
                 function (data) {
-                    console.log(data);
+                    var msg;
+                    debugger
+                    $.ajax({
+                        url:"/blog/update",
+                        type:"post",
+                        dataType:"json",
+                        data:{id:data.field.id,title:data.field.title,content:data.field.content},
+                        async:false,
+                        success:function (data) {
+                            msg=data.result;
+                        },
+                        error:function (data) {
+                            msg="更新失败";
+                        }
+                    });
                     //发异步，把数据提交给php
-                    layer.alert("增加成功", {
+                    layer.alert(msg, {
                             icon: 6
                         },
                         function () {
@@ -63,6 +78,7 @@
                             // 可以对父窗口进行刷新
                             xadmin.father_reload();
                         });
+                    return false;
                 });
             form.on('submit(preview)',
                 function (data) {

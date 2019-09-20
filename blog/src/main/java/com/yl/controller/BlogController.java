@@ -1,5 +1,7 @@
 package com.yl.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.yl.bean.Blog;
 import com.yl.service.BlogService;
 import com.yl.util.StringUtil;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -35,9 +38,11 @@ public class BlogController {
      * @date 2019/9/18 10:00
      */
     @RequestMapping("/list")
-    public String list(Model model) {
+    public String list(Model model, @RequestParam(defaultValue = "1") Integer pageNum) {
+        PageHelper.startPage(pageNum, 1);
         List<Blog> blogs = blogService.selectAll();
-        model.addAttribute("blogs", blogs);
+        PageInfo<Blog> pageInfo = new PageInfo<>(blogs);
+        model.addAttribute("pageInfo", pageInfo);
         return "/blog/list";
     }
 
@@ -69,9 +74,13 @@ public class BlogController {
         Blog blog = new Blog()
                 .setContent(content)
                 .setTitle(title);
-        blogService.insertSelective(blog);
+        int rows = blogService.insertSelective(blog);
         Map<String, Object> map = new HashMap<>(2);
-        map.put("result", "添加成功");
+        if (rows > 0) {
+            map.put("result", "添加成功");
+        } else {
+            map.put("result", "添加失败");
+        }
         return map;
     }
 
@@ -113,20 +122,49 @@ public class BlogController {
      * @param id
      * @param title
      * @param content
-     * @param isShow
      * @return java.lang.String
      * @author YL
      * @date 2019/9/17 17:41
      */
+    @ResponseBody
     @RequestMapping("/update")
-    public String update(Integer id, String title, String content, Integer isShow) {
+    public Map<String, Object> update(Integer id, String title, String content) {
         Blog blog = new Blog()
                 .setId(id)
                 .setTitle(title)
-                .setContent(content)
-                .setIsShow(isShow);
-        blogService.updateByPrimaryKeySelective(blog);
-        return "redirect:list";
+                .setContent(content);
+        int rows = blogService.updateByPrimaryKeySelective(blog);
+        Map<String, Object> map = new HashMap<>(2);
+        if (rows > 0) {
+            map.put("result", "修改成功");
+        } else {
+            map.put("result", "修改失败");
+        }
+        return map;
+    }
+
+    /**
+     * 修改显示状态
+     * @author YL
+     * @date 2019/9/20 16:46
+     * @param id
+     * @param isShow
+     * @return java.util.Map<java.lang.String,java.lang.Object>
+     */
+    @ResponseBody
+    @RequestMapping("/updateStatus")
+    public Map<String,Object> updateStatus(Integer id,Integer isShow){
+        Blog blog=new Blog()
+                .setIsShow(isShow)
+                .setId(id);
+        int rows=blogService.updateByPrimaryKeySelective(blog);
+        Map<String, Object> map = new HashMap<>(2);
+        if (rows > 0) {
+            map.put("result", "状态变更成功");
+        } else {
+            map.put("result", "状态变更失败");
+        }
+        return map;
     }
 
     /**
@@ -141,9 +179,13 @@ public class BlogController {
     @RequestMapping(value = "/delete")
     public Map<String, Object> delete(String ids) {
         String[] id = StringUtil.ids(ids);
-        blogService.deleteByPrimaryKeys(id);
-        Map<String, Object> result = new HashMap<>(2);
-        result.put("result", "删除成功！");
-        return result;
+        int rows = blogService.deleteByPrimaryKeys(id);
+        Map<String, Object> map = new HashMap<>(2);
+        if (rows > 0) {
+            map.put("result", "删除成功");
+        } else {
+            map.put("result", "删除失败");
+        }
+        return map;
     }
 }

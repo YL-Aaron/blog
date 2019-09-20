@@ -15,7 +15,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
-public class Blog implements Serializable {
+public class Blog extends Base implements Serializable {
     private Integer id;
 
     private String title;
@@ -24,7 +24,4 @@ public class Blog implements Serializable {
 
     private String content;
 
-    private Date createTime;
-
-    private Date updateTime;
 }

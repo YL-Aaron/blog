@@ -53,7 +53,7 @@
                 <div class="layui-card-header">
                     <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除
                     </button>
-                    <button class="layui-btn" onclick="xadmin.open('添加用户','/blog/add',600,400,false)"><i
+                    <button class="layui-btn" onclick="xadmin.open('添加用户','/blog/add',600,400,true)"><i
                             class="layui-icon"></i>添加
                     </button>
                 </div>
@@ -65,23 +65,26 @@
                                 <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">
                             </th>
                             <th>标题</th>
-                            <th>是否展示</th>
                             <th>创建时间</th>
                             <th>修改时间</th>
+                            <th>是否展示</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="blog:${blogs}
-">
+                        <tr th:each="blog:${pageInfo.list}">
                             <td>
-                                <input type="checkbox" name="id" th:value="${blog.id}" lay-skin="primary">
+                                <input class="check" type="checkbox" th:value="${blog.id}" lay-skin="primary">
                             </td>
                             <td>[[${blog.title}]]</td>
-                            <td>[[${blog.isShow}]]</td>
-                            <td>[[${blog.createTime}]]</td>
-                            <td>[[${blog.updateTime}]]</td>
-
+                            <td>[[${#dates.format(blog.createTime,'yyyy-MM-dd HH:mm:ss')}]]</td>
+                            <td>[[${#dates.format(blog.updateTime,'yyyy-MM-dd HH:mm:ss')}]]</td>
+                            <td>
+                                <input type="hidden" th:value="${blog.id}">
+                                <input type="checkbox" lay-filter="isShow" name="isShow" lay-text="是|否"
+                                       th:value="${blog.isShow}"
+                                       lay-skin="switch" th:checked="${blog.isShow eq 1}">
+                            </td>
                             <td class="td-manage">
                                 <a title="编辑"
                                    th:onclick="xadmin.open('编辑','/blog/edit?id='+[[${blog.id}]],600,400,true)"
@@ -120,13 +123,31 @@
 
         // 监听全选
         form.on('checkbox(checkall)', function (data) {
-
+            debugger
             if (data.elem.checked) {
-                $('tbody input').prop('checked', true);
+                $('tbody input.check').prop('checked', true);
             } else {
-                $('tbody input').prop('checked', false);
+                $('tbody input.check').prop('checked', false);
             }
             form.render('checkbox');
+        });
+
+        form.on('switch(isShow)', function (data) {
+            var value = data.value == 1 ? 0 : 1;
+            $(data.elem).attr("value", value);
+            var id = $(data.elem).prev().attr("value");
+            var result="状态更新失败";
+            $.ajax({
+                url:"/blog/updateStatus",
+                type:"get",
+                dataType:"json",
+                async:false,
+                data:{id:id,isShow:value},
+                success:function (data) {
+                    result=data.result;
+                }
+            });
+            layer.msg(result, {icon: 1});
         });
 
         //执行一个laydate实例
@@ -158,7 +179,7 @@
                     result = "删除失败";
                 }
             });
-            layer.msg(result, {icon: 1},function () {
+            layer.msg(result, {icon: 1}, function () {
                 location.reload();
             });
         });
@@ -193,7 +214,7 @@
                     result = "删除失败";
                 }
             });
-            layer.msg(result, {icon: 1},function () {
+            layer.msg(result, {icon: 1}, function () {
                 location.reload();
             });
         });

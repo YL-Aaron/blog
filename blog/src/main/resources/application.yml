@@ -7,6 +7,13 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
   thymeleaf:
     cache: false
+
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.yl.bean
+  type-aliases-package: com.yl.bean.
+
+pagehelper:
+  helper-dialect: mysql
+  params: count=countSql
+  reasonable: true
+  support-methods-arguments: true

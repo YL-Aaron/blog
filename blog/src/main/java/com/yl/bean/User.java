@@ -13,7 +13,7 @@ import java.util.Date;
  */
 @Data
 @NoArgsConstructor
-public class User implements Serializable {
+public class User extends Base implements Serializable {
     private Integer id;
 
     private String username;
@@ -21,9 +21,5 @@ public class User implements Serializable {
     private String password;
 
     private String img;
-
-    private Date createTime;
-
-    private Date updateTime;
 
 }
