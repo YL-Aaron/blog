@@ -100,14 +100,22 @@
                     </table>
                 </div>
                 <div class="layui-card-body">
-                    <div class="page">
+                    <div class="page" th:if="${pageInfo.pages} ne 0">
                         <div>
-                            <a class="prev" href="">&lt;&lt;</a>
-                            <a class="num" href="">1</a>
-                            <span class="current">2</span>
-                            <a class="num" href="">3</a>
-                            <a class="num" href="">489</a>
-                            <a class="next" href="">&gt;&gt;</a>
+                            <a class="prev" th:href="@{${pageInfo.hasPreviousPage?'list?pageNum='+pageInfo.prePage:'javaScript:;'}}"><<</a>
+
+                            <a class="num" th:if="${pageInfo.pageNum} gt 2 " href="list?pageNum=1">1</a>
+                            <a class="num" th:if="${pageInfo.pageNum} gt 3 " href="javaScript:;">···</a>
+                            <a class="num" th:if="${pageInfo.pageNum} gt 4 " href="javaScript:;">[[${pageInfo.prePage-2}]]</a>
+                            <a class="num" th:if="${pageInfo.pageNum} gt 4 " href="javaScript:;">[[${pageInfo.prePage-1}]]</a>
+                            <a class="num" th:if="${pageInfo.hasPreviousPage}" href="">[[${pageInfo.prePage}]]</a>
+                            <span class="current">[[${pageInfo.pageNum}]]</span>
+                            <a class="num" th:if="${pageInfo.hasNextPage}" href="">[[${pageInfo.nextPage}]]</a>
+                            <a class="num" th:if="${pageInfo.pages} gt ${pageInfo.pageNum+2} " href="javaScript:;">[[${pageInfo.nextPage+1}]]</a>
+                            <a class="num" th:if="${pageInfo.pages} lt ${pageInfo.pageNum+6} " href="javaScript:;">···</a>
+                            <a class="num" th:if="${pageInfo.pages} ne ${pageInfo.pageNum} " href="">[[${pageInfo.pages}]]</a>
+
+                            <a class="next" th:href="@{${pageInfo.hasNextPage?'list?pageNum='+pageInfo.nextPage:'javaScript:;'}}">&gt;&gt;</a>
                         </div>
                     </div>
                 </div>
@@ -136,15 +144,15 @@
             var value = data.value == 1 ? 0 : 1;
             $(data.elem).attr("value", value);
             var id = $(data.elem).prev().attr("value");
-            var result="状态更新失败";
+            var result = "状态更新失败";
             $.ajax({
-                url:"/blog/updateStatus",
-                type:"get",
-                dataType:"json",
-                async:false,
-                data:{id:id,isShow:value},
-                success:function (data) {
-                    result=data.result;
+                url: "/blog/updateStatus",
+                type: "get",
+                dataType: "json",
+                async: false,
+                data: {id: id, isShow: value},
+                success: function (data) {
+                    result = data.result;
                 }
             });
             layer.msg(result, {icon: 1});
