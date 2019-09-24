@@ -20,8 +20,4 @@ public class Type extends Base implements Serializable {
 
     private String name;
 
-    private Date createTime;
-
-    private Date updateTime;
-
 }
