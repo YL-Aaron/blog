@@ -24,7 +24,8 @@
         select
         <include refid="Base_Column_List"/>
         from
-        <include refid="Tables"/> order by create_Time desc
+        <include refid="Tables"/>
+        order by create_Time desc
     </select>
     <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -45,9 +46,10 @@
     <delete id="deleteByPrimaryKeys">
         delete from
         <include refid="Tables"/>
-        where id in <foreach collection="array" item="item" index="index" open="(" separator="," close=")">
-        #{item}
-    </foreach>
+        where id in
+        <foreach collection="array" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </delete>
     <insert id="insert" parameterType="com.yl.bean.Blog">
         insert into

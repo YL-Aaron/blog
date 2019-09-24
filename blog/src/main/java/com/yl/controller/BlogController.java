@@ -38,8 +38,8 @@ public class BlogController {
      * @date 2019/9/18 10:00
      */
     @RequestMapping("/list")
-    public String list(Model model, @RequestParam(defaultValue = "1") Integer pageNum) {
-        PageHelper.startPage(pageNum, 1);
+    public String list(Model model, @RequestParam(defaultValue = "1") Integer pageNum,@RequestParam(defaultValue = "10")Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         List<Blog> blogs = blogService.selectAll();
         PageInfo<Blog> pageInfo = new PageInfo<>(blogs);
         model.addAttribute("pageInfo", pageInfo);

@@ -35,6 +35,13 @@
                 </div>
             </div>
             <div class="layui-form-item">
+                <label class="layui-form-label">
+                    <span class="x-red">*</span>类型</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="title" required="" lay-verify="required" autocomplete="off"
+                           class="layui-input"></div>
+            </div>
+            <div class="layui-form-item">
                 <label class="layui-form-label"></label>
                 <button class="layui-btn" lay-filter="preview" lay-submit="">预览</button>
                 <button class="layui-btn" lay-filter="save" lay-submit="">增加</button>
@@ -51,21 +58,20 @@
             //监听提交
             form.on('submit(save)',
                 function (data) {
-                var msg;
-                debugger
-                $.ajax({
-                    url:"/blog/save",
-                    type:"post",
-                    dataType:"json",
-                    data:{title:data.field.title,content:data.field.content},
-                    async:false,
-                    success:function (data) {
-                        msg=data.result;
-                    },
-                    error:function (data) {
-                        msg="添加失败";
-                    }
-                });
+                    var msg;
+                    $.ajax({
+                        url: "/blog/save",
+                        type: "post",
+                        dataType: "json",
+                        data: {title: data.field.title, content: data.field.content},
+                        async: false,
+                        success: function (data) {
+                            msg = data.result;
+                        },
+                        error: function (data) {
+                            msg = "添加失败";
+                        }
+                    });
                     //发异步，把数据提交给php
                     layer.alert(msg, {
                             icon: 6
@@ -83,9 +89,10 @@
                 function (data) {
                     $("form").attr("action", "/blog/preview");
                 });
+            //屏蔽文本域tab键的换行
             $("textarea").on(
                 'keydown',
-                function(e) {
+                function (e) {
                     if (e.keyCode == 9) {
                         e.preventDefault();
                         var indent = '\t';

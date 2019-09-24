@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.dao.TypeBlogMapper">
+    <resultMap id="BaseResultMap" type="com.yl.bean.TypeBlog">
+        <id column="blog_Id" jdbcType="INTEGER" property="blogId"/>
+        <id column="type_Id" jdbcType="INTEGER" property="typeId"/>
+    </resultMap>
+    <sql id="Tables">
+    type_blog
+  </sql>
+    <delete id="deleteByPrimaryKey" parameterType="com.yl.bean.TypeBlog">
+        delete from
+        <include refid="Tables"/>
+        where blog_Id = #{blogId,jdbcType=INTEGER}
+        and type_Id = #{typeId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.yl.bean.TypeBlog">
+        insert into
+        <include refid="Tables"/>
+        (blog_Id, type_Id)
+        values (#{blogId,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.yl.bean.TypeBlog">
+        insert into
+        <include refid="Tables"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="blogId != null">
+                blog_Id,
+            </if>
+            <if test="typeId != null">
+                type_Id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="blogId != null">
+                #{blogId,jdbcType=INTEGER},
+            </if>
+            <if test="typeId != null">
+                #{typeId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+</mapper>

@@ -53,7 +53,7 @@
                 <div class="layui-card-header">
                     <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除
                     </button>
-                    <button class="layui-btn" onclick="xadmin.open('添加用户','/blog/add',600,400,true)"><i
+                    <button class="layui-btn" onclick="xadmin.open('写博客','/blog/add',600,400,true)"><i
                             class="layui-icon"></i>添加
                     </button>
                 </div>
@@ -100,7 +100,8 @@
                     </table>
                 </div>
                 <div class="layui-card-body">
-                    <div class="page" th:if="${pageInfo.pages} ne 0">
+                    <div class="page" id="page"></div>
+                    <!--<div class="page" th:if="${pageInfo.pages} ne 0">
                         <div>
                             <a class="prev" th:href="@{${pageInfo.hasPreviousPage?'list?pageNum='+pageInfo.prePage:'javaScript:;'}}"><<</a>
 
@@ -117,21 +118,35 @@
 
                             <a class="next" th:href="@{${pageInfo.hasNextPage?'list?pageNum='+pageInfo.nextPage:'javaScript:;'}}">&gt;&gt;</a>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
     </div>
 </div>
 </body>
-<script>
-    layui.use(['laydate', 'form'], function () {
+<script th:inline="javascript">
+    layui.use(['laydate', 'form', 'laypage'], function () {
         var laydate = layui.laydate;
         var form = layui.form;
+        var laypage = layui.laypage;
 
+        laypage.render({
+            elem: 'page',
+            count: [[${pageInfo.total}]],
+            curr: [[${pageInfo.pageNum}]],
+            limit: [[${pageInfo.pageSize}]],
+            skin: '#1E9FFF',
+            jump: function (obj, first) {
+                if (!first) {
+                    var pageSize = obj.limit;
+                    var pageNum = obj.curr;
+                    window.location.href = "list?pageSize=" + pageSize + "&pageNum=" + pageNum;//跳转链接
+                }
+            }
+        });
         // 监听全选
         form.on('checkbox(checkall)', function (data) {
-            debugger
             if (data.elem.checked) {
                 $('tbody input.check').prop('checked', true);
             } else {
@@ -196,9 +211,8 @@
 
     function delAll(argument) {
         var ids = [];
-
-        // 获取选中的id 
-        $('tbody input').each(function (index, el) {
+        // 获取选中的id
+        $('tbody input.check').each(function (index, el) {
             if ($(this).prop('checked')) {
                 ids.push($(this).val())
             }

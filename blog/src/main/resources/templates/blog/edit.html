@@ -32,7 +32,8 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入内容" id="content" name="content" class="layui-textarea">[[${blog.content}]]</textarea>
+                    <textarea placeholder="请输入内容" id="content" name="content"
+                              class="layui-textarea">[[${blog.content}]]</textarea>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -53,18 +54,17 @@
             form.on('submit(save)',
                 function (data) {
                     var msg;
-                    debugger
                     $.ajax({
-                        url:"/blog/update",
-                        type:"post",
-                        dataType:"json",
-                        data:{id:data.field.id,title:data.field.title,content:data.field.content},
-                        async:false,
-                        success:function (data) {
-                            msg=data.result;
+                        url: "/blog/update",
+                        type: "post",
+                        dataType: "json",
+                        data: {id: data.field.id, title: data.field.title, content: data.field.content},
+                        async: false,
+                        success: function (data) {
+                            msg = data.result;
                         },
-                        error:function (data) {
-                            msg="更新失败";
+                        error: function (data) {
+                            msg = "更新失败";
                         }
                     });
                     //发异步，把数据提交给php
