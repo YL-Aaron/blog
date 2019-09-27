@@ -11,6 +11,12 @@ import java.util.List;
  */
 public interface BlogMapper extends BaseMapper<Blog>{
 
-    List<Blog> selectAll();
+    /**
+     * 更新id查询
+     * @author YL
+     * @date 2019/9/25 11:52
+     * @param id
+     * @return com.yl.bean.Blog
+     */
     Blog selectById(Integer id);
 }

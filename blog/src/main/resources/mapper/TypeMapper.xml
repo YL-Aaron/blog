@@ -13,6 +13,13 @@
     <sql id="Tables">
     type
   </sql>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Tables"/>
+        order by create_Time desc
+    </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select 'true' as QUERYID,
         <include refid="Base_Column_List"/>

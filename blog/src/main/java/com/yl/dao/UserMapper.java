@@ -11,6 +11,13 @@ import java.util.List;
  * @date 2019/8/13
  */
 public interface UserMapper extends BaseMapper<User>{
+
+    /**
+     * 登录
+     * @author YL
+     * @date 2019/9/25 11:52
+     * @param userName
+     * @return com.yl.bean.User
+     */
     User login(String userName);
-    List<User> selectAll();
 }
