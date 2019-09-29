@@ -2,7 +2,6 @@ package com.yl.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.yl.bean.Blog;
 import com.yl.bean.Type;
 import com.yl.service.TypeService;
 import com.yl.util.StringUtil;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -127,10 +127,11 @@ public class TypeController {
 
     /**
      * 保存类型
+     *
+     * @param name
+     * @return java.util.Map<java.lang.String, java.lang.Object>
      * @author YL
      * @date 2019/9/27 15:42
-     * @param name
-     * @return java.util.Map<java.lang.String,java.lang.Object>
      */
     @ResponseBody
     @PostMapping("/save")
@@ -145,5 +146,29 @@ public class TypeController {
             map.put("result", "添加失败");
         }
         return map;
+    }
+
+    /**
+     * 博客添加页的下拉框
+     *
+     * @param
+     * @return java.util.Map<java.lang.String, java.lang.Object>
+     * @author YL
+     * @date 2019/9/29 15:36
+     */
+    @RequestMapping("/typeDropDown")
+    @ResponseBody
+    public Map<String, Object> typeDropDown() {
+        Map<String, Object> result = new HashMap<>(2);
+        List<Type> type = typeService.selectAll();
+        List<Map<String, Object>> data = new ArrayList<>();
+        for (int i = 0; i < type.size(); i++) {
+            Map<String, Object> temp = new HashMap<>(2);
+            temp.put("name", type.get(i).getName());
+            temp.put("value", type.get(i).getId());
+            data.add(temp);
+        }
+        result.put("data", data);
+        return result;
     }
 }

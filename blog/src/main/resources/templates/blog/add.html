@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../css/xadmin.css">
     <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../js/xadmin.js"></script>
+    <script type="text/javascript" src="../js/xm-select.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -35,11 +36,10 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">
-                    <span class="x-red">*</span>类型</label>
+                <label class="layui-form-label">类型</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="title" required="" lay-verify="required" autocomplete="off"
-                           class="layui-input"></div>
+                    <div id="select" class="xm-select-demo"></div>
+                </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label"></label>
@@ -51,10 +51,28 @@
 </div>
 <script>
     layui.use(['form', 'layer', 'jquery'],
-        function () {
+        function (index) {
             var $ = layui.jquery;
             var form = layui.form,
                 layer = layui.layer;
+
+            var type;
+            $.ajax({
+                url: "/type/typeDropDown",
+                type: "get",
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    type = xmSelect.render({
+                        el: '#select',
+                        data: data.data
+                    });
+                },
+                error: function (data) {
+                    layer.alert("获取类型失败")
+                }
+            });
+
             //监听提交
             form.on('submit(save)',
                 function (data) {
@@ -63,7 +81,7 @@
                         url: "/blog/save",
                         type: "post",
                         dataType: "json",
-                        data: {title: data.field.title, content: data.field.content},
+                        data: {title: data.field.title, content: data.field.content, types: type.getValue("valueStr")},
                         async: false,
                         success: function (data) {
                             msg = data.result;

@@ -82,6 +82,7 @@
                 });
             form.on('submit(preview)',
                 function (data) {
+                    $("form").attr("method", "post");
                     $("form").attr("action", "/blog/preview");
                 });
         }

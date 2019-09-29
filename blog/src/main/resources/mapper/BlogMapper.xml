@@ -34,6 +34,51 @@
         <include refid="Tables"/>
         where id = #{id,jdbcType=INTEGER}
     </select>
+
+    <insert id="insertBlog" useGeneratedKeys="true" keyProperty="id">
+        insert into
+        <include refid="Tables"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="isShow != null">
+                is_show,
+            </if>
+            <if test="createTime != null">
+                create_Time,
+            </if>
+            <if test="updateTime != null">
+                update_Time,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="isShow != null">
+                #{isShow,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
         select 'true' as QUERYID,
         <include refid="Base_Column_List"/>

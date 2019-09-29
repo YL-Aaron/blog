@@ -12,7 +12,14 @@ import java.util.List;
  */
 public interface BlogService extends BaseService<Blog> {
 
-    @Override
-    List<Blog> selectAll();
+    /**
+     * 根据id查询博客（不查content）
+     * @author YL
+     * @date 2019/9/29 17:59
+     * @param id
+     * @return com.yl.bean.Blog
+     */
     Blog selectById(Integer id);
+
+    int insertBlog();
 }

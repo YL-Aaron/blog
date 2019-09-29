@@ -70,7 +70,7 @@ public class BlogController {
      */
     @ResponseBody
     @PostMapping("/save")
-    public Map<String, Object> save(String title, String content) {
+    public Map<String, Object> save(String title, String content,String types) {
         Blog blog = new Blog()
                 .setContent(content)
                 .setTitle(title);
