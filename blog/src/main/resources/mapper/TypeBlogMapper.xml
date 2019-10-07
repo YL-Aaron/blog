@@ -8,11 +8,29 @@
     <sql id="Tables">
     type_blog
   </sql>
+    <select id="selectByBlogId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select type_Id from
+        <include refid="Tables"/>
+        where blog_Id = #{blogId,jdbcType=INTEGER}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="com.yl.bean.TypeBlog">
         delete from
         <include refid="Tables"/>
         where blog_Id = #{blogId,jdbcType=INTEGER}
         and type_Id = #{typeId,jdbcType=INTEGER}
+    </delete>
+    <delete id="delete" parameterType="com.yl.bean.TypeBlog">
+        delete from
+        <include refid="Tables"/>
+        <where>
+            <if test="blogId!=null">
+                blog_Id = #{blogId,jdbcType=INTEGER}
+            </if>
+            <if test="typeId!=null">
+                and type_Id = #{typeId,jdbcType=INTEGER}
+            </if>
+        </where>
+
     </delete>
     <insert id="insert" parameterType="com.yl.bean.TypeBlog">
         insert into

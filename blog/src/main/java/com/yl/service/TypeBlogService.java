@@ -1,15 +1,16 @@
-package com.yl.dao;
+package com.yl.service;
 
 import com.yl.bean.TypeBlog;
 
 import java.util.List;
+import java.util.Map;
 
 /**
- * 博客-类型接口
- * @author YL
- * @date 2019/9/24 17:36
+ * @author yi
+ * @desciption 类型——博客接口
+ * @date 2019/10/2
  */
-public interface TypeBlogMapper extends BaseMapper<TypeBlog>{
+public interface TypeBlogService extends BaseService<TypeBlog> {
     /**
      * 根据博客编号获取博客类型
      * @author yl
@@ -17,7 +18,7 @@ public interface TypeBlogMapper extends BaseMapper<TypeBlog>{
      * @param blogId id
      * @return java.util.List<com.yl.bean.TypeBlog>
      */
-    List<TypeBlog> selectByBlogId(Integer blogId);
+    List<Integer> selectByBlogId(Integer blogId);
 
     /**
      * 删除

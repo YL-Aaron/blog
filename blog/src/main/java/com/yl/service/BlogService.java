@@ -21,5 +21,23 @@ public interface BlogService extends BaseService<Blog> {
      */
     Blog selectById(Integer id);
 
-    int insertBlog();
+    /**
+     * 添加博客，同时添加博客类型
+     * @author yl
+     * @date 2019/10/3 20:11
+     * @param blog
+     * @param typeId
+     * @return int
+     */
+    int insertBlog(Blog blog,Integer[] typeId);
+
+    /**
+     * 更新博客，同时更新博客类型
+     * @author yl
+     * @date 2019/10/3 20:18
+     * @param blog
+     * @param typeId
+     * @return int
+     */
+    int updateBlog(Blog blog,Integer[] typeId);
 }

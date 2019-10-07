@@ -30,9 +30,21 @@ public class AdminController {
 
     @RequestMapping("/welcome")
     public String newArticle(Model model) {
+        //获取用户信息
         User user = (User) SecurityUtils.getSubject().getPrincipal();
+        String jdk = System.getProperty("java.version");
+        String system = System.getProperty("os.name");
+        String vendor = System.getProperty("java.vendor");
         model.addAttribute("userName", user.getUsername());
+        model.addAttribute("jdk", jdk);
+        model.addAttribute("system", system);
+        model.addAttribute("vendor", vendor);
         return "/welcome";
+    }
+
+    @RequestMapping("/welcome1")
+    public String newArticle1() {
+        return "/welcome1";
     }
 
     @RequestMapping("/login")
@@ -43,11 +55,11 @@ public class AdminController {
     @PostMapping("/loginUser")
     public String loginUser(String userName, String password, Model model) {
         try {
-            password= DigestUtils.md5DigestAsHex(password.getBytes());
+            password = DigestUtils.md5DigestAsHex(password.getBytes());
             UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
-            model.addAttribute("userName",userName);
+            model.addAttribute("userName", userName);
             return "index";
         } catch (AuthenticationException e) {
             e.printStackTrace();
@@ -56,8 +68,8 @@ public class AdminController {
     }
 
     @GetMapping("/loginOut")
-    public String loginOut(){
-        Subject subject=SecurityUtils.getSubject();
+    public String loginOut() {
+        Subject subject = SecurityUtils.getSubject();
         subject.logout();
         return "login";
     }

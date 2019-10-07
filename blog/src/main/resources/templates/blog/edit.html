@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../css/xadmin.css">
     <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../js/xadmin.js"></script>
+    <script type="text/javascript" src="../js/xm-select.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -37,6 +38,12 @@
                 </div>
             </div>
             <div class="layui-form-item">
+                <label class="layui-form-label">类型</label>
+                <div class="layui-input-inline">
+                    <div id="select" class="xm-select-demo"></div>
+                </div>
+            </div>
+            <div class="layui-form-item">
                 <label class="layui-form-label"></label>
                 <button class="layui-btn" lay-filter="preview" lay-submit="">预览</button>
                 <button class="layui-btn" lay-filter="save" lay-submit="">修改</button>
@@ -44,12 +51,30 @@
         </form>
     </div>
 </div>
-<script>
+<script th:inline="javascript">
     layui.use(['form', 'layer', 'jquery'],
         function () {
             var $ = layui.jquery;
             var form = layui.form,
                 layer = layui.layer;
+            var type;
+            $.ajax({
+                url: "/type/typeDropDown",
+                type: "get",
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    type = xmSelect.render({
+                        el: '#select',
+                        data: data.data
+                    });
+                    type.setValue([[${checked}]])
+                },
+                error: function (data) {
+                    layer.alert("获取类型失败")
+                }
+            });
+
             //监听提交
             form.on('submit(save)',
                 function (data) {
@@ -58,7 +83,7 @@
                         url: "/blog/update",
                         type: "post",
                         dataType: "json",
-                        data: {id: data.field.id, title: data.field.title, content: data.field.content},
+                        data: {id: data.field.id, title: data.field.title, content: data.field.content,types: type.getValue("valueStr")},
                         async: false,
                         success: function (data) {
                             msg = data.result;
@@ -67,7 +92,6 @@
                             msg = "更新失败";
                         }
                     });
-                    //发异步，把数据提交给php
                     layer.alert(msg, {
                             icon: 6
                         },

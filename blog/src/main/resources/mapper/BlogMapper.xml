@@ -35,7 +35,7 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
 
-    <insert id="insertBlog" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertBlog" useGeneratedKeys="true" keyProperty="id" parameterType="com.yl.bean.Blog">
         insert into
         <include refid="Tables"/>
         <trim prefix="(" suffix=")" suffixOverrides=",">

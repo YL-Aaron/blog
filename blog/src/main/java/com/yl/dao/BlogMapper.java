@@ -19,4 +19,6 @@ public interface BlogMapper extends BaseMapper<Blog>{
      * @return com.yl.bean.Blog
      */
     Blog selectById(Integer id);
+
+    int insertBlog(Blog blog);
 }

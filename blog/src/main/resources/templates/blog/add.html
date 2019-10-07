@@ -22,7 +22,7 @@
 <body>
 <div class="layui-fluid">
     <div class="layui-row">
-        <form class="layui-form">
+        <form class="layui-form" method="post">
             <div class="layui-form-item">
                 <label class="layui-form-label">
                     <span class="x-red">*</span>标题</label>
@@ -32,7 +32,10 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入内容" id="content" name="content" class="layui-textarea"></textarea>
+                    <div>
+                        <textarea placeholder="请输入内容" id="content" name="content" class="layui-textarea"></textarea>
+                    </div>
+                    <div>111</div>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -90,7 +93,6 @@
                             msg = "添加失败";
                         }
                     });
-                    //发异步，把数据提交给php
                     layer.alert(msg, {
                             icon: 6
                         },
