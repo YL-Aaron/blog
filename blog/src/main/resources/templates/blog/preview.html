@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>预览</title>
     <style>
         #title{
             margin: 0 auto;
@@ -229,7 +229,6 @@
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
 </head>
 <body>
-    <button onclick="javascript:history.go(-1);">返回</button>
 <div id="title"><h1></h1></div>
 <div id="result"></div>
 </body>
@@ -238,7 +237,7 @@
         var title = [[${title}]];
         var content = [[${content}]];
         $("h1").append(title);
-        var converter = new showdown.Converter();
+        var converter = new showdown.Converter({table:true});
         var html = converter.makeHtml(content);
         document.getElementById("result").innerHTML = html;
     })

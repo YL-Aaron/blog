@@ -64,6 +64,7 @@ public class BlogServiceImpl extends BaseServiceImpl<Blog> implements BlogServic
      * @param typeId
      * @return int
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public int updateBlog(Blog blog, Integer[] typeId) {
         int rows = blogMapper.updateByPrimaryKeySelective(blog);

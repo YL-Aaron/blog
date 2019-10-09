@@ -107,7 +107,9 @@
                 });
             form.on('submit(preview)',
                 function (data) {
-                    $("form").attr("action", "/blog/preview");
+                    window.open("http://www.cnblogs.com/liumengdie/","_blank");
+                    return false;
+                    //$("form").attr("action", "/blog/preview");
                 });
             //屏蔽文本域tab键的换行
             $("textarea").on(
