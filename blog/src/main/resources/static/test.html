@@ -229,7 +229,7 @@
 <script type="text/javascript">
     function compile(){
         var text = document.getElementById("content").value;
-        var converter = new showdown.Converter();
+        var converter = new showdown.Converter({tables:true});
         var html = converter.makeHtml(text);
         document.getElementById("result").innerHTML = html;
     }

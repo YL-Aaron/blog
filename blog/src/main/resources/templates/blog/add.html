@@ -32,10 +32,7 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <div>
-                        <textarea placeholder="请输入内容" id="content" name="content" class="layui-textarea"></textarea>
-                    </div>
-                    <div>111</div>
+                    <textarea placeholder="请输入内容" id="content" name="content" class="layui-textarea"></textarea>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -107,9 +104,9 @@
                 });
             form.on('submit(preview)',
                 function (data) {
-                    window.open("http://www.cnblogs.com/liumengdie/","_blank");
-                    return false;
-                    //$("form").attr("action", "/blog/preview");
+                    $("form").attr("method", "post");
+                    $("form").attr("action", "/blog/preview");
+                    $("form").attr("target", "_blank");
                 });
             //屏蔽文本域tab键的换行
             $("textarea").on(

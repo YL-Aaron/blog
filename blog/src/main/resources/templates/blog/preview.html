@@ -13,7 +13,7 @@
         /* 主页面设置*/
         *{
             font-size: 16px;
-            font-family: 幼圆;
+            font-family: 仿宋;
         }
         body{
             background-color: #FDF6E3;
@@ -37,7 +37,7 @@
         /* ====================================================*/
         h1 {
             font-size: 2.8em;
-            color: #000;
+            color: #d33682;
             margin: 0.75em;
         }
         h2 {
@@ -237,7 +237,7 @@
         var title = [[${title}]];
         var content = [[${content}]];
         $("h1").append(title);
-        var converter = new showdown.Converter({table:true});
+        var converter = new showdown.Converter({tables:true});
         var html = converter.makeHtml(content);
         document.getElementById("result").innerHTML = html;
     })
