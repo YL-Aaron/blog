@@ -52,7 +52,7 @@ public class AdminController {
         return "/login";
     }
 
-    @PostMapping("/loginUser")
+    @PostMapping("/login")
     public String loginUser(String userName, String password, Model model) {
         try {
             password = DigestUtils.md5DigestAsHex(password.getBytes());
