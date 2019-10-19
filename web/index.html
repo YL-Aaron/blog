@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>my blog</title>
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/include.js"></script>
+    <style>
+        #title{
+            margin: 0 auto;
+        }
+        h1{
+            text-align: center;
+        }
+        /* 主页面设置*/
+        *{
+            font-size: 16px;
+            font-family: 仿宋;
+        }
+        body{
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #FFF;
+            line-height: 1.5em;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        /* !important的作用是提高指定样式规则的应用优先权。*/
+        body>*:first-child {
+            margin-top: 0 !important;
+        }
+
+        body>*:last-child {
+            margin-bottom: 0 !important;
+        }
+        /* <tt> 标签与 <code> 和 <kbd> 标签一样，<tt> 标签和必
+        需的 </tt> 结束标签告诉浏览器，要把其中包含的文本显示
+        为等宽字体。*/
+
+        /* 标题 h1~h2*/
+        /* ====================================================*/
+        h1 {
+            font-size: 2.8em;
+            color: #d33682;
+            margin: 0.75em;
+        }
+        h2 {
+            font-size: 2.4em;
+            color: #9B31EA;
+            margin: 0.75em;
+
+        }
+        h3 {
+            font-size: 1.8em;
+            color: #338000;
+            margin: 0.75em;
+        }
+        h4 {
+            font-size: 1.4em;
+            margin: 0.75em;
+        }
+
+        /* p,a,,hr,list,table*/
+
+        /* ==================================================*/
+        /*<blockquote> 标签定义摘自另一个源的块引用。浏览器
+        通常会对 <blockquote> 元素进行缩进。
+        */
+        blockquote {
+            font-style: italic;
+            border-left: 5px solid;
+            margin-left: 2em;
+            padding-left: 1em;
+        }
+
+        /* p*/
+        p {
+            margin-bottom: 1.5em;
+        }
+        /* hr */
+        hr {
+            clear: both;
+            margin: 15px 0;
+            height: 0px;
+            overflow: hidden;
+            border: none;
+            background: transparent;
+            border-bottom: 4px solid #ddd;
+            padding: 0;
+        }
+        /*  link*/
+
+        a {
+            color: #b58900;
+            text-decoration: none;
+        }
+        a:focus {
+            outline: thin dotted;
+        }
+        a:active,a:hover {
+            outline: 0;
+        }
+        a:hover {
+            color: #cb4b16;
+            text-decoration: underline;
+        }
+        a:visited {
+            color: #cb4b16;
+        }
+
+        /* list */
+
+        ul,
+        ol {
+            margin: 0 0 1.5em 1.5em;
+        }
+        ol li {
+            list-style-type: decimal;
+            list-style-position: outside;
+        }
+        ul li {
+            list-style-type: disc;
+            list-style-position: outside;
+        }
+
+        /* tables */
+
+        table thead, table tr {
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-top-color: rgb(235, 242, 224);
+        }
+        table {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: rgb(235, 242, 224);
+        }
+        thead,table td:nth-child(1){
+            font-weight:bold;
+            color: #7034ca;
+        }
+        /* Padding and font style */
+        table td, table th {
+            padding: 5px 10px;
+            font-size: 12px;
+            font-family: Verdana;
+            color: rgb(149, 170, 109);
+        }
+
+        /* Alternating background colors */
+        table tr:nth-child(even) {
+            background: rgb(230, 238, 214)
+        }
+        table tr:nth-child(odd) {
+            background: #FFF
+        }
+
+        /* code */
+        /* =======================================*/
+        pre{
+            border-radius: .5em;
+            border: .3em solid hsl(0, 0%, 33%);
+            box-shadow: 1px 1px 0.5em black inset;
+            margin: .5em 0;
+            overflow: auto;
+            padding: 1em;
+            background: hsl(0, 0%, 8%);
+        }
+
+        pre, code, tt {
+            font-size: 12px;
+            font-family: Consolas, "Liberation Mono", Courier, monospace;
+        }
+
+        code, tt {
+            margin: 0 0px;
+            padding: 0px 0px;
+            white-space: nowrap;
+            border: 1px solid #eaeaea;
+            background-color: #f8f8f8;
+            border-radius: 3px;
+        }
+
+        pre>code {
+            margin: 0;
+            padding: 0;
+            white-space: pre;
+            color: rgba(192, 192, 192, 1);/*字体颜色*/
+            font-size: 16px;
+            border: none;
+            background: transparent;
+
+        }
+
+
+
+        pre code, pre tt {
+            background-color: transparent;
+            border: none;
+        }
+
+        /*目录形成的范围*/
+        #outline-list {
+            height: 325px;
+            position: fixed;
+            overflow-y:scroll;
+            overflow-x:hidden;
+            bottom: 80px;
+            right: 15px;
+            width: 220px;
+        }
+        /* 设置滚动条的样式 */
+        ::-webkit-scrollbar {
+            width:12px;
+        }
+        /* 滚动槽 */
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3);
+            border-radius:10px;
+        }
+        /* 滚动条滑块 */
+        ::-webkit-scrollbar-thumb {
+            border-radius:10px;
+            background:rgba(0,0,0,0.1);
+            -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.5);
+        }
+        ::-webkit-scrollbar-thumb:window-inactive {
+            background:rgba(255,1000,0,0.4);
+        }
+    </style>
+    <script src="js/showdown.js"></script>
+</head>
+<body>
+<!--顶部导航-->
+<include src="templates/header.html"></include>
+<!--主题内容-->
+<main>
+    <div id="title"><h1></h1></div>
+    <div id="result"></div>
+</main>
+<!--页脚-->
+<include src="templates/footer.html"></include>
+</body>
+<script>
+
+    $(function () {
+        var title = "markdown\u7B80\u4ECB";
+        var content = "## \u4E3B\u8981\u5185\u5BB9\r\n\r\n> #### Markdown*\u662F\u4EC0\u4E48*\uFF1F\r\n>\r\n> #### *\u8C01*\u521B\u9020\u4E86\u5B83\uFF1F\r\n>\r\n> #### *\u4E3A\u4EC0\u4E48*\u8981\u4F7F\u7528\u5B83\uFF1F\r\n>\r\n> #### *\u600E\u4E48*\u4F7F\u7528\uFF1F\r\n>\r\n> #### *\u8C01*\u5728\u7528\uFF1F\r\n>\r\n> #### \u5C1D\u8BD5\u4E00\u4E0B\r\n\r\n## \u6B63\u6587\r\n\r\n### 1. Markdown*\u662F\u4EC0\u4E48*\uFF1F\r\n\r\n**Markdown**\u662F\u4E00\u79CD\u8F7B\u91CF\u7EA7**\u6807\u8BB0\u8BED\u8A00**\uFF0C\u5B83\u4EE5\u7EAF\u6587\u672C\u5F62\u5F0F(*\u6613\u8BFB\u3001\u6613\u5199\u3001\u6613\u66F4\u6539*)\u7F16\u5199\u6587\u6863\uFF0C\u5E76\u6700\u7EC8\u4EE5HTML\u683C\u5F0F\u53D1\u5E03\u3002    \r\n**Markdown**\u4E5F\u53EF\u4EE5\u7406\u89E3\u4E3A\u5C06\u4EE5MARKDOWN\u8BED\u6CD5\u7F16\u5199\u7684\u8BED\u8A00\u8F6C\u6362\u6210HTML\u5185\u5BB9\u7684\u5DE5\u5177\u3002    \r\n\r\n### 2. *\u8C01*\u521B\u9020\u4E86\u5B83\uFF1F\r\n\r\n\u5B83\u7531[**Aaron Swartz**](http:\/\/www.aaronsw.com\/)\u548C**John Gruber**\u5171\u540C\u8BBE\u8BA1\uFF0C**Aaron Swartz**\u57282013\u5E741\u670811\u65E5\u81EA\u6740,\u6709\u7740**\u5F00\u6302**\u4E00\u822C\u4EBA\u751F\u7ECF\u5386\u7684\u7A0B\u5E8F\u5458\u3002\u7EF4\u57FA\u767E\u79D1\u5BF9\u4ED6\u7684[\u4ECB\u7ECD](http:\/\/zh.wikipedia.org\/wiki\/%E4%BA%9A%E4%BC%A6%C2%B7%E6%96%AF%E6%B2%83%E8%8C%A8)\u662F\uFF1A**\u8F6F\u4EF6\u5DE5\u7A0B\u5E08\u3001\u4F5C\u5BB6\u3001\u653F\u6CBB\u7EC4\u7EC7\u8005\u3001\u4E92\u8054\u7F51\u6D3B\u52A8\u5BB6\u3001\u7EF4\u57FA\u767E\u79D1\u4EBA**\u3002    \r\n\r\n\u4ED6\u6709\u7740\u8DB3\u4EE5\u8BA9\u4F60\u8DEA\u62DC\u7684\u4EBA\u751F\u7ECF\u5386\uFF1A    \r\n\r\n- **14\u5C81**\u53C2\u4E0ERSS 1.0\u89C4\u683C\u6807\u51C6\u7684\u5236\u8BA2\u3002     \r\n- **2004**\u5E74\u5165\u8BFB**\u65AF\u5766\u798F**\uFF0C\u4E4B\u540E\u9000\u5B66\u3002   \r\n- **2005**\u5E74\u521B\u5EFA[Infogami](http:\/\/infogami.org\/)\uFF0C\u4E4B\u540E\u4E0E[Reddit](http:\/\/www.reddit.com\/)\u5408\u5E76\u6210\u4E3A\u5176\u5408\u4F19\u4EBA\u3002   \r\n- **2010**\u5E74\u521B\u7ACB\u6C42\u8FDB\u4F1A\uFF08Demand Progress\uFF09\uFF0C\u79EF\u6781\u53C2\u4E0E\u7981\u6B62\u7F51\u7EDC\u76D7\u7248\u6CD5\u6848\uFF08SOPA\uFF09\u6D3B\u52A8\uFF0C\u6700\u7EC8\u8BE5\u63D0\u6848\u88AB\u64A4\u56DE\u3002   \r\n- **2011**\u5E747\u670819\u65E5\uFF0C\u56E0\u88AB\u63A7\u4ECEMIT\u548CJSTOR\u4E0B\u8F7D480\u4E07\u7BC7\u5B66\u672F\u8BBA\u6587\u5E76\u4EE5\u514D\u8D39\u5F62\u5F0F\u4E0A\u4F20\u4E8E\u7F51\u7EDC\u88AB\u6355\u3002     \r\n- **2013**\u5E741\u6708\u81EA\u6740\u8EAB\u4EA1\u3002    \r\n\r\n![Aaron Swartz](https:\/\/github.com\/younghz\/Markdown\/raw\/master\/resource\/Aaron_Swartz.jpg)\r\n\r\n\u5929\u624D\u90FD\u6709\u65E9\u901D\u7684\u5F52\u9014\u3002\r\n\r\n### 3. *\u4E3A\u4EC0\u4E48*\u8981\u4F7F\u7528\u5B83\uFF1F\r\n\r\n- \u5B83\u662F\u6613\u8BFB\uFF08\u770B\u8D77\u6765\u8212\u670D\uFF09\u3001\u6613\u5199\uFF08\u8BED\u6CD5\u7B80\u5355\uFF09\u3001\u6613\u66F4\u6539**\u7EAF\u6587\u672C**\u3002\u5904\u5904\u4F53\u73B0\u7740**\u6781\u7B80\u4E3B\u4E49**\u7684\u5F71\u5B50\u3002\r\n- \u517C\u5BB9HTML\uFF0C\u53EF\u4EE5\u8F6C\u6362\u4E3AHTML\u683C\u5F0F\u53D1\u5E03\u3002\r\n- \u8DE8\u5E73\u53F0\u4F7F\u7528\u3002\r\n- \u8D8A\u6765\u8D8A\u591A\u7684\u7F51\u7AD9\u652F\u6301Markdown\u3002\r\n- \u66F4\u65B9\u4FBF\u6E05\u6670\u5730\u7EC4\u7EC7\u4F60\u7684\u7535\u5B50\u90AE\u4EF6\u3002\uFF08Markdown-here, Airmail\uFF09\r\n- \u6446\u8131Word\uFF08\u6211\u4E0D\u662F\u8BA4\u771F\u7684\uFF09\u3002\r\n\r\n### 4. *\u600E\u4E48*\u4F7F\u7528\uFF1F\r\n\r\n\u5982\u679C\u4E0D\u7B97**\u6269\u5C55**\uFF0CMarkdown\u7684\u8BED\u6CD5\u7EDD\u5BF9**\u7B80\u5355**\u5230\u8BA9\u4F60\u7231\u4E0D\u91CA\u624B\u3002\r\n\r\nMarkdown\u8BED\u6CD5\u4E3B\u8981\u5206\u4E3A\u5982\u4E0B\u51E0\u5927\u90E8\u5206\uFF1A\r\n**\u6807\u9898**\uFF0C**\u6BB5\u843D**\uFF0C**\u533A\u5757\u5F15\u7528**\uFF0C**\u4EE3\u7801\u533A\u5757**\uFF0C**\u5F3A\u8C03**\uFF0C**\u5217\u8868**\uFF0C**\u5206\u5272\u7EBF**\uFF0C**\u94FE\u63A5**\uFF0C**\u56FE\u7247**\uFF0C**\u53CD\u659C\u6760 `\\`**\uFF0C**\u7B26\u53F7'`'**\u3002\r\n\r\n#### 4.1 \u6807\u9898\r\n\r\n\u4E24\u79CD\u5F62\u5F0F\uFF1A  \r\n1\uFF09\u4F7F\u7528`=`\u548C`-`\u6807\u8BB0\u4E00\u7EA7\u548C\u4E8C\u7EA7\u6807\u9898\u3002\r\n\r\n> \u4E00\u7EA7\u6807\u9898   \r\n> `=========`   \r\n> \u4E8C\u7EA7\u6807\u9898    \r\n> `---------`\r\n\r\n\u6548\u679C\uFF1A\r\n\r\n> # \u4E00\u7EA7\u6807\u9898   \r\n>\r\n> ## \u4E8C\u7EA7\u6807\u9898\r\n\r\n2\uFF09\u4F7F\u7528`#`\uFF0C\u53EF\u8868\u793A1-6\u7EA7\u6807\u9898\u3002\r\n\r\n> \\# \u4E00\u7EA7\u6807\u9898   \r\n> \\## \u4E8C\u7EA7\u6807\u9898   \r\n> \\### \u4E09\u7EA7\u6807\u9898   \r\n> \\#### \u56DB\u7EA7\u6807\u9898   \r\n> \\##### \u4E94\u7EA7\u6807\u9898   \r\n> \\###### \u516D\u7EA7\u6807\u9898    \r\n\r\n\u6548\u679C\uFF1A\r\n\r\n> # \u4E00\u7EA7\u6807\u9898   \r\n>\r\n> ## \u4E8C\u7EA7\u6807\u9898   \r\n>\r\n> ### \u4E09\u7EA7\u6807\u9898   \r\n>\r\n> #### \u56DB\u7EA7\u6807\u9898   \r\n>\r\n> ##### \u4E94\u7EA7\u6807\u9898   \r\n>\r\n> ###### \u516D\u7EA7\u6807\u9898\r\n\r\n#### 4.2 \u6BB5\u843D\r\n\r\n\u6BB5\u843D\u7684\u524D\u540E\u8981\u6709\u7A7A\u884C\uFF0C\u6240\u8C13\u7684\u7A7A\u884C\u662F\u6307\u6CA1\u6709\u6587\u5B57\u5185\u5BB9\u3002\u82E5\u60F3\u5728\u6BB5\u5185\u5F3A\u5236\u6362\u884C\u7684\u65B9\u5F0F\u662F\u4F7F\u7528**\u4E24\u4E2A\u4EE5\u4E0A**\u7A7A\u683C\u52A0\u4E0A\u56DE\u8F66\uFF08\u5F15\u7528\u4E2D\u6362\u884C\u7701\u7565\u56DE\u8F66\uFF09\u3002\r\n\r\n\r\n\r\n#### 4.3 \u533A\u5757\u5F15\u7528\r\n\r\n\u5728\u6BB5\u843D\u7684\u6BCF\u884C\u6216\u8005\u53EA\u5728\u7B2C\u4E00\u884C\u4F7F\u7528\u7B26\u53F7`>`,\u8FD8\u53EF\u4F7F\u7528\u591A\u4E2A\u5D4C\u5957\u5F15\u7528\uFF0C\u5982\uFF1A\r\n\r\n> \\> \u533A\u5757\u5F15\u7528  \r\n> \\>> \u5D4C\u5957\u5F15\u7528  \r\n\r\n\u6548\u679C\uFF1A\r\n\r\n> \u533A\u5757\u5F15\u7528  \r\n>\r\n> > \u5D4C\u5957\u5F15\u7528\r\n\r\n#### 4.4 \u4EE3\u7801\u533A\u5757\r\n\r\n\u4EE3\u7801\u533A\u5757\u7684\u5EFA\u7ACB\u662F\u5728\u6BCF\u884C\u52A0\u4E0A4\u4E2A\u7A7A\u683C\u6216\u8005\u4E00\u4E2A\u5236\u8868\u7B26\uFF08\u5982\u540C\u5199\u4EE3\u7801\u4E00\u6837\uFF09\u3002\u5982    \r\n\u666E\u901A\u6BB5\u843D\uFF1A\r\n\r\nvoid main()    \r\n{    \r\n    printf(\"Hello, Markdown.\");    \r\n}    \r\n\r\n\u4EE3\u7801\u533A\u5757\uFF1A\r\n\r\n```\r\nvoid main()\r\n{\r\n    printf(\"Hello, Markdown.\");\r\n}\r\n```\r\n\r\n**\u6CE8\u610F**:\u9700\u8981\u548C\u666E\u901A\u6BB5\u843D\u4E4B\u95F4\u5B58\u5728\u7A7A\u884C\u3002\r\n\r\n#### 4.5 \u5F3A\u8C03\r\n\r\n\u5728\u5F3A\u8C03\u5185\u5BB9\u4E24\u4FA7\u5206\u522B\u52A0\u4E0A`*`\u6216\u8005`_`\uFF0C\u5982\uFF1A\r\n\r\n> \\*\u659C\u4F53\\*\uFF0C\\_\u659C\u4F53\\_    \r\n> \\*\\*\u7C97\u4F53\\*\\*\uFF0C\\_\\_\u7C97\u4F53\\_\\_\r\n\r\n\u6548\u679C\uFF1A\r\n\r\n> *\u659C\u4F53*\uFF0C_\u659C\u4F53_    \r\n> **\u7C97\u4F53**\uFF0C__\u7C97\u4F53__\r\n\r\n#### 4.6 \u5217\u8868\r\n\r\n\u4F7F\u7528`\u00B7`\u3001`+`\u3001\u6216`-`\u6807\u8BB0\u65E0\u5E8F\u5217\u8868\uFF0C\u5982\uFF1A\r\n\r\n> \\-\uFF08+\\*\uFF09 \u7B2C\u4E00\u9879\r\n> \\-\uFF08+\\*\uFF09 \u7B2C\u4E8C\u9879\r\n> \\- \uFF08+\\*\uFF09\u7B2C\u4E09\u9879\r\n\r\n**\u6CE8\u610F**\uFF1A\u6807\u8BB0\u540E\u9762\u6700\u5C11\u6709\u4E00\u4E2A_\u7A7A\u683C_\u6216_\u5236\u8868\u7B26_\u3002\u82E5\u4E0D\u5728\u5F15\u7528\u533A\u5757\u4E2D\uFF0C\u5FC5\u987B\u548C\u524D\u65B9\u6BB5\u843D\u4E4B\u95F4\u5B58\u5728\u7A7A\u884C\u3002\r\n\r\n\u6548\u679C\uFF1A\r\n\r\n> - \u7B2C\u4E00\u9879\r\n> - \u7B2C\u4E8C\u9879\r\n> - \u7B2C\u4E09\u9879\r\n\r\n\u6709\u5E8F\u5217\u8868\u7684\u6807\u8BB0\u65B9\u5F0F\u662F\u5C06\u4E0A\u8FF0\u7684\u7B26\u53F7\u6362\u6210\u6570\u5B57,\u5E76\u8F85\u4EE5`.`\uFF0C\u5982\uFF1A\r\n\r\n> 1 . \u7B2C\u4E00\u9879   \r\n> 2 . \u7B2C\u4E8C\u9879    \r\n> 3 . \u7B2C\u4E09\u9879    \r\n\r\n\u6548\u679C\uFF1A\r\n\r\n> 1. \u7B2C\u4E00\u9879\r\n> 2. \u7B2C\u4E8C\u9879\r\n> 3. \u7B2C\u4E09\u9879\r\n\r\n#### 4.7 \u5206\u5272\u7EBF\r\n\r\n\u5206\u5272\u7EBF\u6700\u5E38\u4F7F\u7528\u5C31\u662F\u4E09\u4E2A\u6216\u4EE5\u4E0A`*`\uFF0C\u8FD8\u53EF\u4EE5\u4F7F\u7528`-`\u548C`_`\u3002\r\n\r\n#### 4.8 \u94FE\u63A5\r\n\r\n\u94FE\u63A5\u53EF\u4EE5\u7531\u4E24\u79CD\u5F62\u5F0F\u751F\u6210\uFF1A**\u884C\u5185\u5F0F**\u548C**\u53C2\u8003\u5F0F**\u3002    \r\n**\u884C\u5185\u5F0F**\uFF1A\r\n\r\n> \\[younghz\u7684Markdown\u5E93\\]\\(https::\/\/github.com\/younghz\/Markdown \"Markdown\"\\)\u3002\r\n\r\n\u6548\u679C\uFF1A\r\n\r\n> [younghz\u7684Markdown\u5E93](https::\/\/github.com\/younghz\/Markdown \"Markdown\")\u3002\r\n\r\n**\u53C2\u8003\u5F0F**\uFF1A\r\n\r\n> \\[younghz\u7684Markdown\u5E931\\]\\[1\\]    \r\n> \\[younghz\u7684Markdown\u5E932\\]\\[2\\]    \r\n> \\[1\\]:https::\/\/github.com\/younghz\/Markdown \"Markdown\"    \r\n> \\[2\\]:https::\/\/github.com\/younghz\/Markdown \"Markdown\"    \r\n\r\n\u6548\u679C\uFF1A\r\n\r\n> [younghz\u7684Markdown\u5E931][1]    \r\n> [younghz\u7684Markdown\u5E932][2]\r\n\r\n[1]: https::\/\/github.com\/younghz\/Markdown\t\"Markdown\"\r\n[2]: https::\/\/github.com\/younghz\/Markdown\t\"Markdown\"\r\n\r\n**\u6CE8\u610F**\uFF1A\u4E0A\u8FF0\u7684`[1]:https::\/\/github.com\/younghz\/Markdown \"Markdown\"`\u4E0D\u51FA\u73B0\u5728\u533A\u5757\u4E2D\u3002\r\n\r\n#### 4.9 \u56FE\u7247\r\n\r\n\u6DFB\u52A0\u56FE\u7247\u7684\u5F62\u5F0F\u548C\u94FE\u63A5\u76F8\u4F3C\uFF0C\u53EA\u9700\u5728\u94FE\u63A5\u7684\u57FA\u7840\u4E0A\u524D\u65B9\u52A0\u4E00\u4E2A`\uFF01`\u3002\r\n\r\n#### 4.10 \u53CD\u659C\u6760`\\`\r\n\r\n\u76F8\u5F53\u4E8E**\u53CD\u8F6C\u4E49**\u4F5C\u7528\u3002\u4F7F\u7B26\u53F7\u6210\u4E3A\u666E\u901A\u7B26\u53F7\u3002\r\n\r\n#### 4.11 \u7B26\u53F7'`'\r\n\r\n\u8D77\u5230\u6807\u8BB0\u4F5C\u7528\u3002\u5982\uFF1A\r\n\r\n> \\`ctrl+a\\`\r\n\r\n\u6548\u679C\uFF1A\r\n\r\n> `ctrl+a`    \r\n\r\n#### 5. *\u8C01*\u5728\u7528\uFF1F\r\n\r\nMarkdown\u7684\u4F7F\u7528\u8005\uFF1A\r\n\r\n- GitHub\r\n- \u7B80\u4E66\r\n- Stack Overflow\r\n- Apollo\r\n- Moodle\r\n- Reddit\r\n- \u7B49\u7B49\r\n\r\n#### 6. \u5C1D\u8BD5\u4E00\u4E0B\r\n\r\n- **Chrome**\u4E0B\u7684\u63D2\u4EF6\u8BF8\u5982`stackedit`\u4E0E`markdown-here`\u7B49\u975E\u5E38\u65B9\u4FBF\uFF0C\u4E5F\u4E0D\u7528\u62C5\u5FC3\u5E73\u53F0\u53D7\u9650\u3002\r\n- **\u5728\u7EBF**\u7684dillinger.io\u8BC4\u4EF7\u4E5F\u4E0D\u9519   \r\n- **Windowns**\u4E0B\u7684MarkdownPad\u4E5F\u7528\u8FC7\uFF0C\u4E0D\u8FC7\u514D\u8D39\u7248\u7684\u4F53\u9A8C\u4E0D\u662F\u5F88\u597D\u3002    \r\n- **Mac**\u4E0B\u7684Mou\u662F\u56FD\u4EBA\u8D21\u732E\u7684\uFF0C\u53E3\u7891\u5F88\u597D\u3002\r\n- **Linux**\u4E0B\u7684ReText\u4E0D\u9519\u3002    \r\n\r\n**\u5F53\u7136\uFF0C\u6700\u7EC8\u5883\u754C\u6C38\u8FDC\u90FD\u662F\u7B14\u4E0B\u662F\u8BED\u6CD5\uFF0C\u5FC3\u4E2D\u683C\u5F0F\u5316 :)\u3002**\r\n\r\n------\r\n\r\n**\u6CE8\u610F**\uFF1A\u4E0D\u540C\u7684Markdown\u89E3\u91CA\u5668\u6216\u5DE5\u5177\u5BF9\u76F8\u5E94\u8BED\u6CD5\uFF08\u6269\u5C55\u8BED\u6CD5\uFF09\u7684\u89E3\u91CA\u6548\u679C\u4E0D\u5C3D\u76F8\u540C\uFF0C\u5177\u4F53\u53EF\u53C2\u89C1\u5DE5\u5177\u7684\u4F7F\u7528\u8BF4\u660E\u3002\r\n\u867D\u7136\u6709\u4EBA\u60F3\u51FA\u9762\u641E\u4E00\u4E2A\u6240\u8C13\u7684\u6807\u51C6\u5316\u7684Markdown\uFF0C[\u6CA1\u60F3\u5230\u8FD8\u60F9\u6012\u4E86\u5065\u5728\u7684\u521B\u59CB\u4EBAJohn Gruber]\r\n(http:\/\/blog.codinghorror.com\/standard-markdown-is-now-common-markdown\/ )\u3002\r\n\r\n------\r\n\r\n\u4EE5\u4E0A\u57FA\u672C\u662F\u6240\u6709traditonal markdown\u7684\u8BED\u6CD5\u3002\r\n\r\n### \u5176\u5B83\uFF1A\r\n\r\n\u5217\u8868\u7684\u4F7F\u7528(\u975Etraditonal markdown)\uFF1A\r\n\r\n\u7528`|`\u8868\u793A\u8868\u683C\u7EB5\u5411\u8FB9\u754C\uFF0C\u8868\u5934\u548C\u8868\u5185\u5BB9\u7528`-`\u9694\u5F00\uFF0C\u5E76\u53EF\u7528`:`\u8FDB\u884C\u5BF9\u9F50\u8BBE\u7F6E\uFF0C\u4E24\u8FB9\u90FD\u6709`:`\u5219\u8868\u793A\u5C45\u4E2D\uFF0C\u82E5\u4E0D\u52A0`:`\u5219\u9ED8\u8BA4\u5DE6\u5BF9\u9F50\u3002\r\n\r\n|    \u4EE3\u7801\u5E93    | \u94FE\u63A5                                                         |\r\n| :----------: | ------------------------------------------------------------ |\r\n|   MarkDown   | [https:\/\/github.com\/younghz\/Markdown](https:\/\/github.com\/younghz\/Markdown \"Markdown\") |\r\n| MarkDownCopy | [https:\/\/github.com\/younghz\/Markdown](https:\/\/github.com\/younghz\/Markdown \"Markdown\") |\r\n\r\n\u5173\u4E8E\u5176\u5B83\u6269\u5C55\u8BED\u6CD5\u53EF\u53C2\u89C1\u5177\u4F53\u5DE5\u5177\u7684\u4F7F\u7528\u8BF4\u660E\u3002";
+        $("h1").append(title);
+        var converter = new showdown.Converter({tables:true});
+        var html = converter.makeHtml(content);
+        document.getElementById("result").innerHTML = html;
+    })
+
+</script>
+</html>

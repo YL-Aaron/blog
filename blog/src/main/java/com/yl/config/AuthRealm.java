@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author yi
- * @desciption
+ * @desciption 登录验证
  * @date 2019/8/28
  */
 public class AuthRealm extends AuthorizingRealm {
