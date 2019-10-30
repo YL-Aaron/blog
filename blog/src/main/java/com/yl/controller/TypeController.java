@@ -47,7 +47,7 @@ public class TypeController {
         List<Type> blogs = typeService.selectAll();
         PageInfo<Type> pageInfo = new PageInfo<>(blogs);
         model.addAttribute("pageInfo", pageInfo);
-        return "/type/list";
+        return "type/list";
     }
 
     /**
@@ -109,7 +109,7 @@ public class TypeController {
     public String edit(Integer id, Model model) {
         Type type = typeService.selectByPrimaryKey(id);
         model.addAttribute("type", type);
-        return "/type/edit";
+        return "type/edit";
     }
 
     /**
@@ -122,7 +122,7 @@ public class TypeController {
      */
     @RequestMapping("/add")
     public String add() {
-        return "/type/add";
+        return "type/add";
     }
 
     /**

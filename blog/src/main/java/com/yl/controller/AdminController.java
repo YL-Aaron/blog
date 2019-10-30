@@ -25,7 +25,7 @@ public class AdminController {
 
     @RequestMapping("/index")
     public String index() {
-        return "/index";
+        return "index";
     }
 
     @RequestMapping("/welcome")
@@ -36,20 +36,20 @@ public class AdminController {
         String system = System.getProperty("os.name");
         String vendor = System.getProperty("java.vendor");
         model.addAttribute("userName", user.getUsername());
-        model.addAttribute("jdk", jdk);
+        model.addAttribute("jdk",jdk);
         model.addAttribute("system", system);
         model.addAttribute("vendor", vendor);
-        return "/welcome";
+        return "welcome";
     }
 
     @RequestMapping("/welcome1")
     public String newArticle1() {
-        return "/welcome1";
+        return "welcome1";
     }
 
     @RequestMapping("/login")
     public String login() {
-        return "/login";
+        return "login";
     }
 
     @PostMapping("/login")

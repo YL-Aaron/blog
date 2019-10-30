@@ -44,7 +44,7 @@ public class BlogController {
         List<Blog> blogs = blogService.selectAll();
         PageInfo<Blog> pageInfo = new PageInfo<>(blogs);
         model.addAttribute("pageInfo", pageInfo);
-        return "/blog/list";
+        return "blog/list";
     }
 
     /**
@@ -57,7 +57,7 @@ public class BlogController {
      */
     @RequestMapping("/add")
     public String add() {
-        return "/blog/add";
+        return "blog/add";
     }
 
 
@@ -99,7 +99,7 @@ public class BlogController {
     public String preview(String title, String content, Model model) {
         model.addAttribute("title", title);
         model.addAttribute("content", content);
-        return "/blog/preview";
+        return "blog/preview";
     }
 
     /**
@@ -117,7 +117,7 @@ public class BlogController {
         List<Integer> list = typeBlogService.selectByBlogId(id);
         model.addAttribute("blog", blog);
         model.addAttribute("checked", list);
-        return "/blog/edit";
+        return "blog/edit";
     }
 
     /**
