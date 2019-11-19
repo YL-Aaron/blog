@@ -39,6 +39,7 @@ public class ShiroConfiguration {
         LinkedHashMap<String, String> filter = new LinkedHashMap<>();
         filter.put("/index", "authc");
         filter.put("/login", "anon");
+        filter.put("/api/**", "anon");
         filter.put("/css/**", "anon");
         filter.put("/fonts/**", "anon");
         filter.put("/images/**", "anon");

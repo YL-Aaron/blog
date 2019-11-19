@@ -1,4 +1,4 @@
-package com.yl.api;
+package com.yl.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -21,7 +21,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/blog")
-public class BlogController {
+public class ApiBlogController {
 
     @Resource
     private BlogService blogService;
