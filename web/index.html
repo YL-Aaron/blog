@@ -1,336 +1,217 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
+<!--<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>my blog</title>
 
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link rel="stylesheet" href="css/story.css">
+    <link rel="stylesheet" href="css/descartes.css.css">
+    <link rel="stylesheet" href="css/css">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
+    &lt;!&ndash;<link rel="stylesheet" href="css/index.css">&ndash;&gt;
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style>
-        #title {
-            margin: 0 auto;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        /* 主页面设置*/
-        * {
-            font-size: 16px;
-            font-family: 仿宋;
-        }
-
-        body {
-            /*//padding-top: 40px;*/
-            padding-bottom: 40px;
-            background-color: #FFF;
-            line-height: 1.5em;
-            max-width: 960px;
-            margin: 0 auto;
-        }
-
-        /* !important的作用是提高指定样式规则的应用优先权。*/
-        body > *:first-child {
-            margin-top: 0 !important;
-        }
-
-        body > *:last-child {
-            margin-bottom: 0 !important;
-        }
-
-        main{
-            padding-top: 40px;
-        }
-        /* <tt> 标签与 <code> 和 <kbd> 标签一样，<tt> 标签和必
-        需的 </tt> 结束标签告诉浏览器，要把其中包含的文本显示
-        为等宽字体。*/
-
-        /* 标题 h1~h2*/
-        /* ====================================================*/
-        h1 {
-            font-size: 2.8em;
-            color: #d33682;
-            margin: 0.75em;
-        }
-
-        h2 {
-            font-size: 2.4em;
-            color: #9B31EA;
-            margin: 0.75em;
-
-        }
-
-        h3 {
-            font-size: 1.8em;
-            color: #338000;
-            margin: 0.75em;
-        }
-
-        h4 {
-            font-size: 1.4em;
-            margin: 0.75em;
-        }
-
-        /* p,a,,hr,list,table*/
-
-        /* ==================================================*/
-        /*<blockquote> 标签定义摘自另一个源的块引用。浏览器
-        通常会对 <blockquote> 元素进行缩进。
-        */
-        blockquote {
-            font-style: italic;
-            border-left: 5px solid;
-            margin-left: 2em;
-            padding-left: 1em;
-        }
-
-        /* p*/
-        p {
-            margin-bottom: 1.5em;
-        }
-
-        /* hr */
-        hr {
-            clear: both;
-            margin: 15px 0;
-            height: 0px;
-            overflow: hidden;
-            border: none;
-            background: transparent;
-            border-bottom: 4px solid #ddd;
-            padding: 0;
-        }
-
-        /*  link*/
-
-        a {
-            color: #b58900;
-            text-decoration: none;
-        }
-
-        a:focus {
-            outline: thin dotted;
-        }
-
-        a:active, a:hover {
-            outline: 0;
-        }
-
-        a:hover {
-            color: #cb4b16;
-            text-decoration: underline;
-        }
-
-        a:visited {
-            color: #cb4b16;
-        }
-
-        /* list */
-
-        ul,
-        ol {
-            margin: 0 0 1.5em 1.5em;
-        }
-
-        ol li {
-            list-style-type: decimal;
-            list-style-position: outside;
-        }
-
-        ul li {
-            list-style-type: disc;
-            list-style-position: outside;
-        }
-
-        table thead, table tr {
-            border-top-width: 1px;
-            border-top-style: solid;
-            border-top-color: rgb(235, 242, 224);
-        }
-
-        table {
-            border-bottom-width: 1px;
-            border-bottom-style: solid;
-            border-bottom-color: rgb(235, 242, 224);
-        }
-
-        thead, table td:nth-child(1) {
-            font-weight: bold;
-            color: #7034ca;
-        }
-
-        /* Padding and font style */
-        table td, table th {
-            padding: 5px 10px;
-            font-size: 12px;
-            font-family: Verdana;
-            color: rgb(149, 170, 109);
-        }
-
-        /* Alternating background colors */
-        table tr:nth-child(even) {
-            background: rgb(230, 238, 214)
-        }
-
-        table tr:nth-child(odd) {
-            background: #FFF
-        }
-
-        /* code */
-        /* =======================================*/
-        pre {
-            border-radius: .5em;
-            border: .3em solid hsl(0, 0%, 33%);
-            box-shadow: 1px 1px 0.5em black inset;
-            margin: .5em 0;
-            overflow: auto;
-            padding: 1em;
-            background: hsl(0, 0%, 8%);
-        }
-
-        pre, code, tt {
-            font-size: 12px;
-            font-family: Consolas, "Liberation Mono", Courier, monospace;
-        }
-
-        code, tt {
-            margin: 0 0px;
-            padding: 0px 0px;
-            white-space: nowrap;
-            border: 1px solid #eaeaea;
-            background-color: #f8f8f8;
-            border-radius: 3px;
-        }
-
-        pre > code {
-            margin: 0;
-            padding: 0;
-            white-space: pre;
-            color: rgba(192, 192, 192, 1); /*字体颜色*/
-            font-size: 16px;
-            border: none;
-            background: transparent;
-
-        }
-
-
-        pre code, pre tt {
-            background-color: transparent;
-            border: none;
-        }
-
-        /*目录形成的范围*/
-        #outline-list {
-            height: 325px;
-            position: fixed;
-            overflow-y: scroll;
-            overflow-x: hidden;
-            bottom: 80px;
-            right: 15px;
-            width: 220px;
-        }
-
-        /* 设置滚动条的样式 */
-        ::-webkit-scrollbar {
-            width: 12px;
-        }
-
-        /* 滚动槽 */
-        ::-webkit-scrollbar-track {
-            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-        }
-
-        /* 滚动条滑块 */
-        ::-webkit-scrollbar-thumb {
-            border-radius: 10px;
-            background: rgba(0, 0, 0, 0.1);
-            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-        }
-
-        ::-webkit-scrollbar-thumb:window-inactive {
-            background: rgba(255, 1000, 0, 0.4);
-        }
-
-    </style>
     <script src="js/showdown.js"></script>
+</head>-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>my blog</title>
+    <link rel="canonical" href="https://rmoff.github.io/">
+
+    <link rel="shortcut icon" type="image/png" href="https://rmoff.github.io/apple-touch-icon-precomposed.png">
+
+
+    <meta name="generator" content="Hugo 0.59.1">
+    <!--    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">-->
+
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
+    <link rel="stylesheet" href="css/story.css">
+    <link rel="stylesheet" href="css/descartes.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link rel="stylesheet" href="css/css">
+    <link rel="stylesheet" href="css/index.css">
+
+
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
-<body>
+<body class="ma0 bg-white  page-kind-home is-page-false ">
 <!--顶部导航-->
-<header>
-    <!--<include src="templates/header.html"></include>-->
+<nav class="dt w-100 border-box pa3 ph5-ns">
+    <a class="dtc v-mid mid-gray link dim w-25" href="#" title="Home">
+        <img src="http://tachyons.io/img/logo.jpg" class="dib w2 h2 br-100" alt="Site Name">
+    </a>
+    <div class="dtc v-mid w-75 tr">
+        <a class="link dim dark-gray f6 f5-ns dib mr3 mr4-ns" href="#" title="About">Services</a>
+        <a class="link dim dark-gray f6 f5-ns dib mr3 mr4-ns" href="#" title="Store">Blog</a>
+        <a class="link dim dark-gray f6 f5-ns dib" href="#" title="Contact">Join Us</a>
+    </div>
+</nav>
 
-</header>
+
 <!--主题内容-->
 <main>
-    <div id="title"><h1></h1></div>
-    <div id="result"></div>
+    <!--<div style="border: 1px solid red;overflow:hidden">
+        <div style="padding-top:4rem;height:256px;width:200px;float: left;border-radius: 0.5rem;background: url('https://rmoff.github.io/images/2019/11/IMG_1281.jpeg') no-repeat center;background-size: cover!important;"></div>
+        <div style="border: 1px solid red;float: left;padding:0 0 0 16px">
+            <h1 style="font-size: 1.5rem;margin-top: 0;line-height: 1.25;font-weight: 100;display: block;margin-block-start: 1em;margin-block-end: 1em;box-sizing: border-box;font-family: 'Quattrocento Sans', -apple-system, BlinkMacSystemFont, 'avenir next', avenir, 'helvetica neue', helvetica, ubuntu, roboto, noto, 'segoe ui', arial, sans-serif;">
+                <a style="transition: color .15s ease-in;opacity: 1;color: inherit;text-decoration: none;box-sizing: border-box;background-color: transparent;font-size: 1.5rem;line-height: 1.25;font-weight: 100;font-family: 'Quattrocento Sans', -apple-system, BlinkMacSystemFont, 'avenir next', avenir, 'helvetica neue', helvetica, ubuntu, roboto, noto, 'segoe ui', arial, sans-serif;">Common mistakes made when configuring multiple Kafka Connect workers</a></h1>
+            <div>
+                111111111111111
+                <p>
+                    <a class="ba br3 pa2 link" style="transition: color .15s ease-in;color: #357edd;border: 1px solid;padding: .5rem;text-decoration: none;border-radius: .5rem;background-color: transparent;cursor: pointer;">Continue Reading
+                        <i class="fas fa-chevron-circle-right"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>-->
+    <div class="pa3 pa4-ns w-100 w-70-ns center">
+        <section class="w-100 mw8">
+            <div class="relative w-100">
+                <article>
+                    <div class="db pv4 ph3 ph0-l no-underline dark-gray">
+                        <div class="flex flex-column flex-row-ns">
+
+                            <div class="mb4 mb0-ns w-100 h4 h4-m w4-m h5-ns w5-ns br3 cover hide-child"
+                                 style="background-image: url('img/IMG_1281.jpeg'); background-position: center;">
+                                <a href="https://rmoff.github.io/2019/11/22/common-mistakes-made-when-configuring-multiple-kafka-connect-workers/"
+                                   class="sans-serif db child w-100 h-100 f7 lh-copy white no-underline br3 ph3 pt4 pt5-l ttu tc bg-black-60">
+                                    <i class="mt3 mt5-l child far fa-calendar-alt"></i> Nov 22, 2019
+                                </a>
+                            </div>
+
+                            <div class="w-100 w6-ns pl3-ns">
+                                <h1 class="f3 fw1 mt0 lh-title"><a
+                                        href="https://rmoff.github.io/2019/11/22/common-mistakes-made-when-configuring-multiple-kafka-connect-workers/"
+                                        class="color-inherit dim link">Common mistakes made when configuring multiple
+                                    Kafka Connect workers</a></h1>
+                                <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
+
+                                    Kafka Connect can be deployed in two modes: Standalone or Distributed. You can learn
+                                    more about them in my Kafka Summit London 2019 talk.
+                                    I usually recommend Distributed for several reasons:
+                                    It can scale
+                                    It is fault-tolerant
+                                    It can be run on a single node sandbox or a multi-node production environment
+                                    It is the same configuration method however you run it
+                                    <p class="pa0 sans-serif f7"><a class="ba br3 pa2 link"
+                                                                    href="https://rmoff.github.io/2019/11/22/common-mistakes-made-when-configuring-multiple-kafka-connect-workers/">Continue
+                                        Reading <i class="fas fa-chevron-circle-right"></i></a></p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="relative w-100">
+                <article>
+                    <div class="db pv4 ph3 ph0-l no-underline dark-gray">
+                        <div class="flex flex-column flex-row-ns">
+
+                            <div class="mb4 mb0-ns w-100 h4 h4-m w4-m h5-ns w5-ns br3 cover hide-child"
+                                 style="background-image: url('img/IMG_1281.jpeg'); background-position: center;">
+                                <a href="https://rmoff.github.io/2019/11/22/common-mistakes-made-when-configuring-multiple-kafka-connect-workers/"
+                                   class="sans-serif db child w-100 h-100 f7 lh-copy white no-underline br3 ph3 pt4 pt5-l ttu tc bg-black-60">
+                                    <i class="mt3 mt5-l child far fa-calendar-alt"></i> Nov 22, 2019
+                                </a>
+                            </div>
+
+                            <div class="w-100 w6-ns pl3-ns">
+                                <h1 class="f3 fw1 mt0 lh-title"><a
+                                        href="https://rmoff.github.io/2019/11/22/common-mistakes-made-when-configuring-multiple-kafka-connect-workers/"
+                                        class="color-inherit dim link">Common mistakes made when configuring multiple
+                                    Kafka Connect workers</a></h1>
+                                <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
+
+                                    Kafka Connect can be deployed in two modes: Standalone or Distributed. You can learn
+                                    more about them in my Kafka Summit London 2019 talk.
+                                    I usually recommend Distributed for several reasons:
+                                    It can scale
+                                    It is fault-tolerant
+                                    It can be run on a single node sandbox or a multi-node production environment
+                                    It is the same configuration method however you run it
+                                    <p class="pa0 sans-serif f7"><a class="ba br3 pa2 link"
+                                                                    href="https://rmoff.github.io/2019/11/22/common-mistakes-made-when-configuring-multiple-kafka-connect-workers/">Continue
+                                        Reading <i class="fas fa-chevron-circle-right"></i></a></p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="relative w-100">
+                <article>
+                    <div class="db pv4 ph3 ph0-l no-underline dark-gray">
+                        <div class="flex flex-column flex-row-ns">
+
+                            <div class="mb4 mb0-ns w-100 h4 h4-m w4-m h5-ns w5-ns br3 cover hide-child"
+                                 style="background-image: url('img/IMG_1281.jpeg'); background-position: center;">
+                                <a href="https://rmoff.github.io/2019/11/22/common-mistakes-made-when-configuring-multiple-kafka-connect-workers/"
+                                   class="sans-serif db child w-100 h-100 f7 lh-copy white no-underline br3 ph3 pt4 pt5-l ttu tc bg-black-60">
+                                    <i class="mt3 mt5-l child far fa-calendar-alt"></i> Nov 22, 2019
+                                </a>
+                            </div>
+
+                            <div class="w-100 w6-ns pl3-ns">
+                                <h1 class="f3 fw1 mt0 lh-title"><a
+                                        href="https://rmoff.github.io/2019/11/22/common-mistakes-made-when-configuring-multiple-kafka-connect-workers/"
+                                        class="color-inherit dim link">Common mistakes made when configuring multiple
+                                    Kafka Connect workers</a></h1>
+                                <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
+
+                                    Kafka Connect can be deployed in two modes: Standalone or Distributed. You can learn
+                                    more about them in my Kafka Summit London 2019 talk.
+                                    I usually recommend Distributed for several reasons:
+                                    It can scale
+                                    It is fault-tolerant
+                                    It can be run on a single node sandbox or a multi-node production environment
+                                    It is the same configuration method however you run it
+                                    <p class="pa0 sans-serif f7"><a class="ba br3 pa2 link"
+                                                                    href="https://rmoff.github.io/2019/11/22/common-mistakes-made-when-configuring-multiple-kafka-connect-workers/">Continue
+                                        Reading <i class="fas fa-chevron-circle-right"></i></a></p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </div>
 </main>
 <!--页脚-->
-<footer>
-    <!--<include src="templates/footer.html"></include>-->
-</footer>
+<footer></footer>
 </body>
-<!--<script type="text/javascript" color="0,205,205" opacity='0.7' zIndex="-2" count="99"
-        src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>-->
+<script type="text/javascript" color="0,205,205" opacity='0.7' zIndex="-2" count="99"
+        src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
 <script>
-
     $(function () {
         $("header,footer,main,.menu").css("display", "none");
         window.onload = function () {
-            /*$("#result").children().each(function (index, element) {
-                var tagName = $(this).get(0).tagName;
-                if (tagName.substr(0, 1).toUpperCase() == "H") {
-                    console.log(tagName);
-                    var contentH = $(this).html();//获取内容
-                    var markid = "mark-" + tagName + "-" + index.toString();
-                    $(this).attr("id", markid);//为当前h标签设置id
-                    var spaceNum = "";
-                    if (tagName === 'HR') {
-                        return
-                    } else if (tagName === 'H1') {
-                        spaceNum = "";
-                    } else if (tagName === 'H2') {
-                        spaceNum = "1.5";
-                    } else if (tagName === 'H3') {
-                        spaceNum = "3";
-                    } else if (tagName === 'H4') {
-                        spaceNum = "4.5";
-                    } else if (tagName === 'H5') {
-                        spaceNum = "6";
-                    } else if (tagName === 'H6') {
-                        spaceNum = "7.5";
-                    }
-                    $(".menu").append("<a href='#" + markid + "'" + " style='text-indent: " + spaceNum + "em'" + ">" + contentH + "</a>");//在目标DIV中添加内容
-                }
-            });*/
             $("header").slideDown(1000);
             $("main").slideDown(2000);
             $(".menu").slideDown(2000);
             $("footer").slideDown(4000);
-        }
-        $("header").load("templates/header.html");
-        $("footer").load("templates/footer.html");
-        const title = "markdown\u7B80\u4ECB";
-        const content="";
-        $("h1").append(title);
-        const converter = new showdown.Converter({tables: true});
-        const html = converter.makeHtml(content);
-        document.getElementById("result").innerHTML = html;
+        };
+        /*$("header").load("templates/header.html");
+        $("footer").load("templates/footer.html");*/
         $.ajax({
-            type:"get",
-            dataType:"json",
-            url:"http://localhost:10086/api/blog/list",
-            success:function (data) {
+            type: "get",
+            dataType: "json",
+            url: "http://localhost:10086/api/blog/list",
+            success: function (data) {
                 console.log(data);
             }
         })
     })
-
 </script>
 </html>
