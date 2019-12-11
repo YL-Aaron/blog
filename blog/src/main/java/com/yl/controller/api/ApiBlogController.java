@@ -1,4 +1,4 @@
-package com.yl.controller;
+package com.yl.controller.api;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -26,6 +26,14 @@ public class ApiBlogController {
     @Resource
     private BlogService blogService;
 
+    /**
+     * 获取列表
+     * @author YL
+     * @date 2019/12/11 14:20
+     * @param pageNum
+     * @param pageSize
+     * @return com.yl.bean.ApiReturn
+     */
     @GetMapping("/list")
     public ApiReturn list(@RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue =
             "10") Integer pageSize){

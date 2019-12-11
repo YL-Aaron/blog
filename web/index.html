@@ -51,7 +51,7 @@
                                  style="background-image: url('img/IMG_1281.jpeg'); background-position: center;">
                                 <a href="https://rmoff.github.io/2019/11/22/common-mistakes-made-when-configuring-multiple-kafka-connect-workers/"
                                    class="sans-serif db child w-100 h-100 f7 lh-copy white no-underline br3 ph3 pt4 pt5-l ttu tc bg-black-60">
-                                    <i class="mt3 mt5-l child far fa-calendar-alt"></i> Nov 22, 2019
+                                    <i class="mt3 mt5-l child far fa-calendar-alt"></i> 2019-01-01
                                 </a>
                             </div>
 
@@ -168,10 +168,8 @@
             $("header").slideDown(1000);
             $("main").slideDown(2000);
             $(".menu").slideDown(2000);
-            $("footer").slideDown(4000);
+            $("footer").slideDown(3000);
         };
-        $("header").load("templates/header.html");
-        /*$("footer").load("templates/footer.html");*/
         $.ajax({
             type: "get",
             dataType: "json",
@@ -179,7 +177,9 @@
             success: function (data) {
                 console.log(data);
             }
-        })
+        });
+        $("header").load("templates/header.html");
+        $("footer").load("templates/footer.html");
     })
 </script>
 </html>

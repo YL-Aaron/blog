@@ -1,4 +1,4 @@
-package com.yl.controller;
+package com.yl.controller.admin;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

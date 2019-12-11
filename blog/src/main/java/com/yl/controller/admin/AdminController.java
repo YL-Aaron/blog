@@ -1,4 +1,4 @@
-package com.yl.controller;
+package com.yl.controller.admin;
 
 import com.yl.bean.User;
 import com.yl.service.UserService;
