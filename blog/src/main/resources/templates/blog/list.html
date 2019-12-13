@@ -7,10 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
-    <link rel="stylesheet" href="../css/font.css">
-    <link rel="stylesheet" href="../css/xadmin.css">
-    <script src="../lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="../js/xadmin.js"></script>
+    <link rel="stylesheet" href="../../css/font.css">
+    <link rel="stylesheet" href="../../css/xadmin.css">
+    <script src="../../lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../js/xadmin.js"></script>
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
@@ -53,7 +53,7 @@
                 <div class="layui-card-header">
                     <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除
                     </button>
-                    <button class="layui-btn" onclick="xadmin.open('写博客','/blog/add',600,400,true)"><i
+                    <button class="layui-btn" onclick="xadmin.open('写博客','/admin/blog/add',600,400,true)"><i
                             class="layui-icon"></i>添加
                     </button>
                 </div>
@@ -87,7 +87,7 @@
                             </td>
                             <td class="td-manage">
                                 <a title="编辑"
-                                   th:onclick="xadmin.open('编辑','/blog/edit?id='+[[${blog.id}]],600,400,true)"
+                                   th:onclick="xadmin.open('编辑','/admin/blog/edit?id='+[[${blog.id}]],600,400,true)"
                                    href="javascript:;">
                                     <i class="layui-icon">&#xe642;</i>
                                 </a>
@@ -161,7 +161,7 @@
             var id = $(data.elem).prev().attr("value");
             var result = "状态更新失败";
             $.ajax({
-                url: "/blog/updateStatus",
+                url: "/admin/blog/updateStatus",
                 type: "get",
                 dataType: "json",
                 async: false,
@@ -190,7 +190,7 @@
         layer.confirm('确认要删除吗？', function (index) {
             var result;
             $.ajax({
-                url: "/blog/delete",
+                url: "/admin/blog/delete",
                 type: "get",
                 async: false,
                 dataType: "json",
@@ -224,7 +224,7 @@
         layer.confirm('确认要删除吗？', function (index) {
             var result;
             $.ajax({
-                url: "/blog/delete",
+                url: "/admin/blog/delete",
                 type: "get",
                 async: false,
                 dataType: "json",

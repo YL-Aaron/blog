@@ -38,6 +38,7 @@ public class ShiroConfiguration {
         bean.setSuccessUrl("/index");
         LinkedHashMap<String, String> filter = new LinkedHashMap<>();
         filter.put("/index", "authc");
+        filter.put("/img/**", "anon");
         filter.put("/login", "anon");
         filter.put("/api/**", "anon");
         filter.put("/css/**", "anon");

@@ -13,11 +13,11 @@
             height: 620px;
         }
     </style>
-    <link rel="stylesheet" href="../css/font.css">
-    <link rel="stylesheet" href="../css/xadmin.css">
-    <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="../js/xadmin.js"></script>
-    <script type="text/javascript" src="../js/xm-select.js"></script>
+    <link rel="stylesheet" href="../../css/font.css">
+    <link rel="stylesheet" href="../../css/xadmin.css">
+    <script type="text/javascript" src="../../lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../js/xadmin.js"></script>
+    <script type="text/javascript" src="../../js/xm-select.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -47,6 +47,19 @@
                 </div>
             </div>
             <div class="layui-form-item">
+                <label class="layui-form-label">图片</label>
+                <div class="layui-input-inline">
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn" id="upload">上传图片</button>
+                        <input type="hidden" id="path" name="img"/>
+                        <div class="layui-upload-list">
+                            <img class="layui-upload-img" id="img" style="width: 204px;height: 256px;border: 1px solid #ccc">
+                            <p id="errorText"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
                 <label class="layui-form-label"></label>
                 <button class="layui-btn" lay-filter="preview" lay-submit="">预览</button>
                 <button class="layui-btn" lay-filter="save" lay-submit="">增加</button>
@@ -55,11 +68,9 @@
     </div>
 </div>
 <script>
-    layui.use(['form', 'layer', 'jquery'],
-        function (index) {
-            var $ = layui.jquery;
-            var form = layui.form,
-                layer = layui.layer;
+    layui.use(['form', 'layer', 'jquery', 'upload'], function (index) {
+            var $ = layui.jquery, form = layui.form,
+                layer = layui.layer, upload = layui.upload;
 
             var type;
             $.ajax({
@@ -78,15 +89,41 @@
                 }
             });
 
+            //图片上传
+            var uploadInst = upload.render({
+                elem: '#upload',
+                url: '/admin/blog/upload',
+                before: function (obj) {
+                    obj.preview(function (index, file, result) {
+                        $("#img").attr("src", result);
+                    });
+                },
+                done: function (res) {
+                    if (res.code === 200) {
+                        $("#path").val(res.data);
+                        return layer.msg(res.msg);
+                    }else {
+                        return layer.msg(res.msg);
+                    }
+                },
+                error: function () {
+                    var errorText = $("#errorText");
+                    errorText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                    demoText.find('.demo-reload').on('click', function () {
+                        uploadInst.upload();
+                    });
+                }
+            });
+
             //监听提交
             form.on('submit(save)',
                 function (data) {
                     var msg;
                     $.ajax({
-                        url: "/blog/save",
+                        url: "/admin/blog/save",
                         type: "post",
                         dataType: "json",
-                        data: {title: data.field.title, content: data.field.content, types: type.getValue("valueStr")},
+                        data: {title: data.field.title, content: data.field.content, types: type.getValue("valueStr"),img: data.field.img},
                         async: false,
                         success: function (data) {
                             msg = data.result;
@@ -110,7 +147,7 @@
             form.on('submit(preview)',
                 function (data) {
                     $("form").attr("method", "post");
-                    $("form").attr("action", "/blog/preview");
+                    $("form").attr("action", "/admin/blog/preview");
                     $("form").attr("target", "_blank");
                 });
             //屏蔽文本域tab键的换行

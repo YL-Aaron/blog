@@ -9,6 +9,10 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
   thymeleaf:
     cache: false
+file:
+  img:
+    upload: f://images//
+    access: /img/
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

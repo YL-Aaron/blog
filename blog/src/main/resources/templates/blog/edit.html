@@ -13,11 +13,11 @@
             height: 620px;
         }
     </style>
-    <link rel="stylesheet" href="../css/font.css">
-    <link rel="stylesheet" href="../css/xadmin.css">
-    <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="../js/xadmin.js"></script>
-    <script type="text/javascript" src="../js/xm-select.js"></script>
+    <link rel="stylesheet" href="../../css/font.css">
+    <link rel="stylesheet" href="../../css/xadmin.css">
+    <script type="text/javascript" src="../../lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../js/xadmin.js"></script>
+    <script type="text/javascript" src="../../js/xm-select.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -46,6 +46,19 @@
                 <label class="layui-form-label">类型</label>
                 <div class="layui-input-inline">
                     <div id="select" class="xm-select-demo"></div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">图片</label>
+                <div class="layui-input-inline">
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn" id="upload">上传图片</button>
+                        <input type="hidden" th:value="${blog.img}" id="path" name="img"/>
+                        <div class="layui-upload-list">
+                            <img class="layui-upload-img" id="img" th:src="${blog.img}" style="width: 204px;height: 256px;border: 1px solid #ccc">
+                            <p id="errorText"></p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -85,7 +98,7 @@
                 function (data) {
                     var msg;
                     $.ajax({
-                        url: "/blog/update",
+                        url: "/admin/blog/update",
                         type: "post",
                         dataType: "json",
                         data: {id: data.field.id, title: data.field.title, content: data.field.content,types: type.getValue("valueStr")},

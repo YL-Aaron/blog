@@ -5,6 +5,7 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="is_show" jdbcType="INTEGER" property="isShow"/>
+        <result column="img" jdbcType="VARCHAR" property="img"/>
         <result column="create_Time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_Time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
@@ -12,7 +13,7 @@
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, title, is_show, create_Time, update_Time
+    id, title, is_show,img, create_Time, update_Time
   </sql>
     <sql id="Blob_Column_List">
     content
@@ -48,6 +49,9 @@
             <if test="isShow != null">
                 is_show,
             </if>
+            <if test="img != null">
+                img,
+            </if>
             <if test="createTime != null">
                 create_Time,
             </if>
@@ -67,6 +71,9 @@
             </if>
             <if test="isShow != null">
                 #{isShow,jdbcType=INTEGER},
+            </if>
+            <if test="img != null">
+                #{img,jdbcType=VARCHAR},
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
@@ -99,10 +106,10 @@
     <insert id="insert" parameterType="com.yl.bean.Blog">
         insert into
         <include refid="Tables"/>
-        (id, title, is_show,
+        (id, title, is_show,img,
         create_Time, update_Time, content
         )
-        values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{isShow,jdbcType=INTEGER},
+        values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{isShow,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR},
         #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
         )
     </insert>
@@ -118,6 +125,9 @@
             </if>
             <if test="isShow != null">
                 is_show,
+            </if>
+            <if test="img != null">
+                img,
             </if>
             <if test="createTime != null">
                 create_Time,
@@ -138,6 +148,9 @@
             </if>
             <if test="isShow != null">
                 #{isShow,jdbcType=INTEGER},
+            </if>
+            <if test="img != null">
+                #{img,jdbcType=VARCHAR},
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
@@ -160,6 +173,9 @@
             <if test="isShow != null">
                 is_show = #{isShow,jdbcType=INTEGER},
             </if>
+            <if test="img != null">
+                title = #{img,jdbcType=VARCHAR},
+            </if>
             <if test="createTime != null">
                 create_Time = #{createTime,jdbcType=TIMESTAMP},
             </if>
@@ -177,6 +193,7 @@
         <include refid="Tables"/>
         set title = #{title,jdbcType=VARCHAR},
         is_show = #{isShow,jdbcType=INTEGER},
+        img = #{img,jdbcType=VARCHAR},
         create_Time = #{createTime,jdbcType=TIMESTAMP},
         update_Time = #{updateTime,jdbcType=TIMESTAMP},
         content = #{content,jdbcType=LONGVARCHAR}
@@ -187,6 +204,7 @@
         <include refid="Tables"/>
         set title = #{title,jdbcType=VARCHAR},
         is_show = #{isShow,jdbcType=INTEGER},
+        img = #{img,jdbcType=VARCHAR},
         create_Time = #{createTime,jdbcType=TIMESTAMP},
         update_Time = #{updateTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=INTEGER}

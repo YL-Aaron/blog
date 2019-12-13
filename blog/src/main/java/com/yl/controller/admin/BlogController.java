@@ -1,16 +1,25 @@
 package com.yl.controller.admin;
 
+import cn.hutool.core.lang.Snowflake;
+import cn.hutool.core.util.IdUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.yl.bean.ApiReturn;
 import com.yl.bean.Blog;
+import com.yl.config.UploadConfig;
 import com.yl.service.BlogService;
 import com.yl.service.TypeBlogService;
 import com.yl.util.StringUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,14 +29,21 @@ import java.util.Map;
  * @desciption 博客控制器
  * @date 2019/9/3
  */
+@Slf4j
 @Controller
-@RequestMapping("/blog")
+@RequestMapping("/admin/blog")
 public class BlogController {
 
     @Resource
     private BlogService blogService;
     @Resource
     private TypeBlogService typeBlogService;
+
+    private final UploadConfig uploadConfig;
+
+    public BlogController(UploadConfig uploadConfig) {
+        this.uploadConfig = uploadConfig;
+    }
 
     /**
      * 进入列表页
@@ -63,19 +79,15 @@ public class BlogController {
 
     /**
      * 保存文章
-     * @author yl
-     * @date 2019/10/3 17:25
-     * @param title
-     * @param content
-     * @param types
+     * @author YL
+     * @date 2019/12/13 17:54
+     * @param blog 博客实体
+     * @param types 博客类型数组
      * @return java.util.Map<java.lang.String,java.lang.Object>
      */
     @ResponseBody
     @PostMapping("/save")
-    public Map<String, Object> save(String title, String content, Integer[] types) {
-        Blog blog = new Blog()
-                .setContent(content)
-                .setTitle(title);
+    public Map<String, Object> save(Blog blog, Integer[] types) {
         int rows = blogService.insertBlog(blog, types);
         Map<String, Object> map = new HashMap<>(2);
         if (rows > 0) {
@@ -120,24 +132,19 @@ public class BlogController {
         return "blog/edit";
     }
 
+
     /**
      * 更新博客
-     *
-     * @param id
-     * @param title
-     * @param content
-     * @return java.lang.String
      * @author YL
-     * @date 2019/9/17 17:41
+     * @date 2019/12/13 17:56
+     * @param blog 博客实体
+     * @param types 博客类型数组
+     * @return java.util.Map<java.lang.String,java.lang.Object>
      */
     @ResponseBody
     @RequestMapping("/update")
-    public Map<String, Object> update(Integer id, String title, String content, Integer[] types) {
-        Blog blog = new Blog()
-                .setId(id)
-                .setTitle(title)
-                .setContent(content);
-        int rows = blogService.updateBlog(blog,types);
+    public Map<String, Object> update(Blog blog, Integer[] types) {
+        int rows = blogService.updateBlog(blog, types);
         Map<String, Object> map = new HashMap<>(2);
         if (rows > 0) {
             map.put("result", "修改成功");
@@ -175,7 +182,7 @@ public class BlogController {
     /**
      * 删除博客
      *
-     * @param ids
+     * @param ids 多选删除
      * @return java.lang.String
      * @author YL
      * @date 2019/9/18 10:04
@@ -194,4 +201,36 @@ public class BlogController {
         return map;
     }
 
+    /**
+     * 上传图片
+     *
+     * @param file 文件流
+     * @return com.yl.bean.ApiReturn
+     * @author YL
+     * @date 2019/12/13 16:30
+     */
+    @ResponseBody
+    @RequestMapping("/upload")
+    public ApiReturn upload(MultipartFile file) {
+        if (file.isEmpty()) {
+            return new ApiReturn(500, "上传失败");
+        }
+        String fileName = file.getOriginalFilename();
+        fileName=fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+        Snowflake snowflake= IdUtil.createSnowflake(1, 1);
+        long id=snowflake.nextId();
+        String newFileName=id+"."+fileName;
+        String path = uploadConfig.getUpload() + newFileName;
+        File dest = new File(path);
+        if (!dest.getParentFile().exists()) {
+            dest.getParentFile().mkdirs();
+        }
+        try {
+            file.transferTo(dest);
+            return new ApiReturn(200, "上传成功",uploadConfig.getAccess()+newFileName);
+        } catch (IOException e) {
+         log.error("upload image error",e.getMessage());
+        }
+        return new ApiReturn(500, "上传失败");
+    }
 }

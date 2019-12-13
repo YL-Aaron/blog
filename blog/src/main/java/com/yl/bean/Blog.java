@@ -22,6 +22,8 @@ public class Blog extends Base implements Serializable {
 
     private Integer isShow;
 
+    private String img;
+
     private String content;
 
 }
