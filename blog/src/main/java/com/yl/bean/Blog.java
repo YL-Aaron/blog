@@ -15,7 +15,8 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
-public class Blog extends Base implements Serializable {
+public class Blog extends Base{
+    private static final long serialVersionUID = 718829747779697296L;
     private Integer id;
 
     private String title;

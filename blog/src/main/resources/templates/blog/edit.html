@@ -53,9 +53,11 @@
                 <div class="layui-input-inline">
                     <div class="layui-upload">
                         <button type="button" class="layui-btn" id="upload">上传图片</button>
-                        <input type="hidden" th:value="${blog.img}" id="path" name="img"/>
+                        <input type="hidden" th:value="${null!=blog.img?blog.img:'/images/default.jpg'}" id="path"
+                               name="img"/>
                         <div class="layui-upload-list">
-                            <img class="layui-upload-img" id="img" th:src="${blog.img}" style="width: 204px;height: 256px;border: 1px solid #ccc">
+                            <img class="layui-upload-img" id="img" th:src="${null!=blog.img?blog.img:'/images/default.jpg'}"
+                                 style="width: 204px;height: 256px;border: 1px solid #ccc">
                             <p id="errorText"></p>
                         </div>
                     </div>
@@ -70,11 +72,9 @@
     </div>
 </div>
 <script th:inline="javascript">
-    layui.use(['form', 'layer', 'jquery'],
+    layui.use(['form', 'layer', 'jquery','upload'],
         function () {
-            var $ = layui.jquery;
-            var form = layui.form,
-                layer = layui.layer;
+            var $ = layui.jquery,form = layui.form,layer = layui.layer,upload=layui.upload;
             var type;
             $.ajax({
                 url: "/type/typeDropDown",
@@ -92,7 +92,31 @@
                     layer.alert("获取类型失败")
                 }
             });
-
+//图片上传
+            var uploadInst = upload.render({
+                elem: '#upload',
+                url: '/admin/blog/upload',
+                before: function (obj) {
+                    obj.preview(function (index, file, result) {
+                        $("#img").attr("src", result);
+                    });
+                },
+                done: function (res) {
+                    if (res.code === 200) {
+                        $("#path").val(res.data);
+                        return layer.msg(res.msg);
+                    }else {
+                        return layer.msg(res.msg);
+                    }
+                },
+                error: function () {
+                    var errorText = $("#errorText");
+                    errorText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                    demoText.find('.demo-reload').on('click', function () {
+                        uploadInst.upload();
+                    });
+                }
+            });
             //监听提交
             form.on('submit(save)',
                 function (data) {
@@ -101,7 +125,12 @@
                         url: "/admin/blog/update",
                         type: "post",
                         dataType: "json",
-                        data: {id: data.field.id, title: data.field.title, content: data.field.content,types: type.getValue("valueStr")},
+                        data: {
+                            id: data.field.id,
+                            title: data.field.title,
+                            content: data.field.content,
+                            types: type.getValue("valueStr")
+                        },
                         async: false,
                         success: function (data) {
                             msg = data.result;

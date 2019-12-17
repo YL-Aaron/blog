@@ -21,6 +21,7 @@ public interface BlogService extends BaseService<Blog> {
      */
     Blog selectById(Integer id);
 
+    List<Blog> selectAll();
     /**
      * 添加博客，同时添加博客类型
      * @author yl

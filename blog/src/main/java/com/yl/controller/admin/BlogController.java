@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yl.bean.ApiReturn;
 import com.yl.bean.Blog;
+import com.yl.bean.BlogSreach;
 import com.yl.config.UploadConfig;
 import com.yl.service.BlogService;
 import com.yl.service.TypeBlogService;
@@ -45,17 +46,18 @@ public class BlogController {
         this.uploadConfig = uploadConfig;
     }
 
+
     /**
-     * 进入列表页
-     *
      * @param model
+     * @param pageNum  页码
+     * @param pageSize 每页条数
      * @return java.lang.String
      * @author YL
-     * @date 2019/9/18 10:00
+     * @date 2019/12/16 10:01
      */
     @RequestMapping("/list")
     public String list(Model model, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue =
-            "10") Integer pageSize) {
+            "10") Integer pageSize, BlogSreach sreach) {
         PageHelper.startPage(pageNum, pageSize);
         List<Blog> blogs = blogService.selectAll();
         PageInfo<Blog> pageInfo = new PageInfo<>(blogs);
@@ -79,11 +81,12 @@ public class BlogController {
 
     /**
      * 保存文章
+     *
+     * @param blog  博客实体
+     * @param types 博客类型数组
+     * @return java.util.Map<java.lang.String, java.lang.Object>
      * @author YL
      * @date 2019/12/13 17:54
-     * @param blog 博客实体
-     * @param types 博客类型数组
-     * @return java.util.Map<java.lang.String,java.lang.Object>
      */
     @ResponseBody
     @PostMapping("/save")
@@ -101,8 +104,8 @@ public class BlogController {
     /**
      * 预览
      *
-     * @param title
-     * @param content
+     * @param title   标题
+     * @param content 内容
      * @return java.lang.String
      * @author YL
      * @date 2019/9/15 11:57
@@ -117,7 +120,7 @@ public class BlogController {
     /**
      * 编辑文章
      *
-     * @param id
+     * @param id    主键
      * @param model
      * @return java.lang.String
      * @author YL
@@ -135,11 +138,12 @@ public class BlogController {
 
     /**
      * 更新博客
+     *
+     * @param blog  博客实体
+     * @param types 博客类型数组
+     * @return java.util.Map<java.lang.String, java.lang.Object>
      * @author YL
      * @date 2019/12/13 17:56
-     * @param blog 博客实体
-     * @param types 博客类型数组
-     * @return java.util.Map<java.lang.String,java.lang.Object>
      */
     @ResponseBody
     @RequestMapping("/update")
@@ -154,21 +158,18 @@ public class BlogController {
         return map;
     }
 
+
     /**
      * 修改显示状态
      *
-     * @param id
-     * @param isShow
+     * @param blog 博客实体
      * @return java.util.Map<java.lang.String, java.lang.Object>
      * @author YL
-     * @date 2019/9/20 16:46
+     * @date 2019/12/16 9:58
      */
     @ResponseBody
     @RequestMapping("/updateStatus")
-    public Map<String, Object> updateStatus(Integer id, Integer isShow) {
-        Blog blog = new Blog()
-                .setIsShow(isShow)
-                .setId(id);
+    public Map<String, Object> updateStatus(Blog blog) {
         int rows = blogService.updateByPrimaryKeySelective(blog);
         Map<String, Object> map = new HashMap<>(2);
         if (rows > 0) {
@@ -216,10 +217,11 @@ public class BlogController {
             return new ApiReturn(500, "上传失败");
         }
         String fileName = file.getOriginalFilename();
-        fileName=fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
-        Snowflake snowflake= IdUtil.createSnowflake(1, 1);
-        long id=snowflake.nextId();
-        String newFileName=id+"."+fileName;
+        assert fileName != null;
+        fileName = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+        Snowflake snowflake = IdUtil.createSnowflake(1, 1);
+        long id = snowflake.nextId();
+        String newFileName = id + "." + fileName;
         String path = uploadConfig.getUpload() + newFileName;
         File dest = new File(path);
         if (!dest.getParentFile().exists()) {
@@ -227,9 +229,9 @@ public class BlogController {
         }
         try {
             file.transferTo(dest);
-            return new ApiReturn(200, "上传成功",uploadConfig.getAccess()+newFileName);
+            return new ApiReturn(200, "上传成功", uploadConfig.getAccess() + newFileName);
         } catch (IOException e) {
-         log.error("upload image error",e.getMessage());
+            log.error(e.getMessage(), "upload image error");
         }
         return new ApiReturn(500, "上传失败");
     }

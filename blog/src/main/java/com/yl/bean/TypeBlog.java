@@ -15,6 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Accessors(chain = true)
 public class TypeBlog implements Serializable {
+    private static final long serialVersionUID = 1200338290369132833L;
     /**博文id*/
     private Integer blogId;
 

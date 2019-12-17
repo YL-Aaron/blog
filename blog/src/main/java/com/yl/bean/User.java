@@ -13,7 +13,8 @@ import java.util.Date;
  */
 @Data
 @NoArgsConstructor
-public class User extends Base implements Serializable {
+public class User extends Base {
+    private static final long serialVersionUID = -8231489371220495958L;
     private Integer id;
 
     private String username;

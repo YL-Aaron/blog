@@ -11,8 +11,10 @@ public class BlogApplicationTests {
 
     @Test
     public void contextLoads() {
-       String title = "markdown\u7B80\u4ECB";
-        System.out.println(title);
+        String a=null;
+        a=a.substring(1);
+        a=a.substring(a.lastIndexOf(".") + 1).toLowerCase();
+        System.out.println(a);
     }
 
 }
