@@ -1,6 +1,7 @@
 package com.yl.service.impl;
 
 import com.yl.bean.Blog;
+import com.yl.bean.BlogSearch;
 import com.yl.bean.TypeBlog;
 import com.yl.dao.BlogMapper;
 import com.yl.dao.TypeBlogMapper;
@@ -33,8 +34,8 @@ public class BlogServiceImpl extends BaseServiceImpl<Blog> implements BlogServic
 
 
     @Override
-    public List<Blog> selectAll() {
-        return blogMapper.selectAll();
+    public List<Blog> selectAll(BlogSearch sreach) {
+        return blogMapper.selectAll(sreach);
     }
 
     @Override

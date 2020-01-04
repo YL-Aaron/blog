@@ -1,6 +1,7 @@
 package com.yl.service;
 
 import com.yl.bean.Blog;
+import com.yl.bean.BlogSearch;
 
 import java.util.List;
 
@@ -21,7 +22,14 @@ public interface BlogService extends BaseService<Blog> {
      */
     Blog selectById(Integer id);
 
-    List<Blog> selectAll();
+    /**
+     * 重写 增加条件查询
+     * @author YL
+     * @date 2019/12/26 14:39
+     * @param sreach
+     * @return java.util.List<com.yl.bean.Blog>
+     */
+    List<Blog> selectAll(BlogSearch sreach);
     /**
      * 添加博客，同时添加博客类型
      * @author yl

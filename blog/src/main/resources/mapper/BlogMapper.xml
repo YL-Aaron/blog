@@ -26,6 +26,17 @@
         <include refid="Base_Column_List"/>
         from
         <include refid="Tables"/>
+        <where>
+            <if test="start !=null">
+                create_Time &gt;#{start,jdbcType=TIMESTAMP}
+            </if>
+            <if test="end !=null">
+                and create_Time &lt;#{end,jdbcType=TIMESTAMP}
+            </if>
+            <if test="name!=null and name!=''">
+                and title like CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+            </if>
+        </where>
         order by create_Time desc
     </select>
     <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">

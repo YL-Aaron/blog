@@ -1,6 +1,7 @@
 package com.yl.bean;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -17,13 +18,15 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class BlogSreach implements Serializable {
+@Builder
+public class BlogSearch implements Serializable {
 
     private static final long serialVersionUID = 4908752234583290001L;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date start;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date end;
-    private String name;
+    @Builder.Default
+    private String name=null;
 }

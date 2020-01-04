@@ -6,13 +6,12 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yl.bean.ApiReturn;
 import com.yl.bean.Blog;
-import com.yl.bean.BlogSreach;
+import com.yl.bean.BlogSearch;
 import com.yl.config.UploadConfig;
 import com.yl.service.BlogService;
 import com.yl.service.TypeBlogService;
 import com.yl.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -48,6 +47,8 @@ public class BlogController {
 
 
     /**
+     * 列表
+     *
      * @param model
      * @param pageNum  页码
      * @param pageSize 每页条数
@@ -56,12 +57,12 @@ public class BlogController {
      * @date 2019/12/16 10:01
      */
     @RequestMapping("/list")
-    public String list(Model model, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue =
-            "10") Integer pageSize, BlogSreach sreach) {
+    public String list(Model model, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue ="10") Integer pageSize, BlogSearch search) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Blog> blogs = blogService.selectAll();
+        List<Blog> blogs = blogService.selectAll(search);
         PageInfo<Blog> pageInfo = new PageInfo<>(blogs);
         model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("search", search);
         return "blog/list";
     }
 
