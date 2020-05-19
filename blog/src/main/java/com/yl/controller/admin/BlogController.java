@@ -49,7 +49,6 @@ public class BlogController {
     /**
      * 列表
      *
-     * @param model
      * @param pageNum  页码
      * @param pageSize 每页条数
      * @return java.lang.String
@@ -69,7 +68,6 @@ public class BlogController {
     /**
      * 进入添加界面
      *
-     * @param
      * @return java.lang.String
      * @author YL
      * @date 2019/9/18 10:01
@@ -122,7 +120,6 @@ public class BlogController {
      * 编辑文章
      *
      * @param id    主键
-     * @param model
      * @return java.lang.String
      * @author YL
      * @date 2019/9/17 16:56

@@ -42,5 +42,4 @@ public class ApiBlogController {
         PageInfo<Blog> pageInfo = new PageInfo<>(blogs);
         return new ApiReturn(ReturnCode.SUCCESS.getCode(),ReturnCode.SUCCESS.getMsg(),pageInfo);
     }
-
 }

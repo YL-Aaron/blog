@@ -39,7 +39,6 @@
 
 <!--主题内容-->
 <main>
-
     <div class="pa3 pa4-ns w-100 w-70-ns center">
         <section class="w-100 mw8">
             <div class="relative w-100">
@@ -79,7 +78,7 @@
                     </div>
                 </article>
             </div>
-            <div class="relative w-100">
+            <!--<div class="relative w-100">
                 <article>
                     <div class="db pv4 ph3 ph0-l no-underline dark-gray">
                         <div class="flex flex-column flex-row-ns">
@@ -152,7 +151,7 @@
                         </div>
                     </div>
                 </article>
-            </div>
+            </div>-->
         </section>
     </div>
 </main>
@@ -175,7 +174,47 @@
             dataType: "json",
             url: "http://localhost:10086/api/blog/list",
             success: function (data) {
-                console.log(data);
+                let node="";
+                let list=data.data.list;
+                for (let i = 0; i < list.length; i++) {
+                    node+="<div class=\"relative w-100\">\n" +
+                        "                <article>\n" +
+                        "                    <div class=\"db pv4 ph3 ph0-l no-underline dark-gray\">\n" +
+                        "                        <div class=\"flex flex-column flex-row-ns\">\n" +
+                        "\n" +
+                        "                            <div class=\"mb4 mb0-ns w-100 h4 h4-m w4-m h5-ns w5-ns br3 cover hide-child\"\n" +
+                        "                                 style=\"background-image: url('http://localhost:10086"+list[i].img+"'); background-position: center;\">\n" +
+                        "                                <a href=\"https://rmoff.github.io/2019/11/22/common-mistakes-made-when-configuring-multiple-kafka-connect-workers/\"\n" +
+                        "                                   class=\"sans-serif db child w-100 h-100 f7 lh-copy white no-underline br3 ph3 pt4 pt5-l ttu tc bg-black-60\">\n" +
+                        "                                    <i class=\"mt3 mt5-l child far fa-calendar-alt\"></i> "+list[i].createTime+"\n" +
+                        "                                </a>\n" +
+                        "                            </div>\n" +
+                        "\n" +
+                        "                            <div class=\"w-100 w6-ns pl3-ns\">\n" +
+                        "                                <h1 class=\"f3 fw1 mt0 lh-title\"><a\n" +
+                        "                                        href=\"https://rmoff.github.io/2019/11/22/common-mistakes-made-when-configuring-multiple-kafka-connect-workers/\"\n" +
+                        "                                        class=\"color-inherit dim link\">"+list[i].title+"</a></h1>\n" +
+                        "                                <div class=\"f6 f5-l lh-copy nested-copy-line-height nested-links\">\n" +
+                        "\n" +
+                        "                                    Kafka Connect can be deployed in two modes: Standalone or Distributed. You can learn\n" +
+                        "                                    more about them in my Kafka Summit London 2019 talk.\n" +
+                        "                                    I usually recommend Distributed for several reasons:\n" +
+                        "                                    It can scale\n" +
+                        "                                    It is fault-tolerant\n" +
+                        "                                    It can be run on a single node sandbox or a multi-node production environment\n" +
+                        "                                    It is the same configuration method however you run it\n" +
+                        "                                    <p class=\"pa0 sans-serif f7\"><a class=\"ba br3 pa2 link\"\n" +
+                        "                                                                    href=\"https://rmoff.github.io/2019/11/22/common-mistakes-made-when-configuring-multiple-kafka-connect-workers/\">Continue\n" +
+                        "                                        Reading <i class=\"fas fa-chevron-circle-right\"></i></a></p>\n" +
+                        "\n" +
+                        "                                </div>\n" +
+                        "                            </div>\n" +
+                        "                        </div>\n" +
+                        "                    </div>\n" +
+                        "                </article>\n" +
+                        "            </div>";
+                }
+                $("section").append(node);
             }
         });
         $("header").load("templates/header.html");
