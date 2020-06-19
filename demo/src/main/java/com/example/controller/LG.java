@@ -25,7 +25,24 @@ public class LG {
         if (value > 0) {
             value--;
             long newNanoTime = System.nanoTime();
-            int update = jdbcTemplate.update("update test set value=?,nano_time=? where nano_time=?", value, newNanoTime,nanoTime);
+            int update = jdbcTemplate.update("update test set value=?,nano_time=? where nano_time=?", value, newNanoTime, nanoTime);
+            if (update > 0) {
+                System.err.println("成功");
+            }
+        }
+        return "end";
+    }
+
+
+    @RequestMapping("buy21")
+    public String buy1() {
+        Map<String, Object> map = jdbcTemplate.queryForMap("select * from test limit 1");
+        int value = Integer.parseInt(map.get("value").toString());
+        Long version = Long.parseLong(map.get("version").toString());
+        if (value > 0) {
+            value--;
+            long newVersion = version + 1;
+            int update = jdbcTemplate.update("update test set value=?,version=? where version=?", value, newVersion, version);
             if (update > 0) {
                 System.err.println("成功");
             }
