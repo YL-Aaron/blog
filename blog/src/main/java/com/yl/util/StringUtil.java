@@ -24,4 +24,5 @@ public class StringUtil {
         String[] result = ids.split(",");
         return result;
     }
+
 }

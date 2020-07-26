@@ -14,12 +14,5 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
-    @Bean
-    public RedissonClient getClient(){
-        Config config = new Config();
 
-        config.useSingleServer().setAddress("redis://127.0.0.1:6379");
-
-        return Redisson.create(config);
-    }
 }

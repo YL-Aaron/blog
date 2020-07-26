@@ -40,6 +40,7 @@ public class RedisController {
                     value--;
                     int update = jdbcTemplate.update("update test set value=?", value);
                     if (update > 0) {
+                        Thread.sleep(10000);
                         System.err.println("成功");
                     }
                 }
