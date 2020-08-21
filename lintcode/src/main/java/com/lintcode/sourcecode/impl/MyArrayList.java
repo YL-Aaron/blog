@@ -9,11 +9,11 @@ import com.lintcode.sourcecode.MyList;
 public class MyArrayList<K> implements MyList<K> {
 
     Object[] elementData;
-    private final int defaultInitialCapacity = 10;
+    private static final int DEFAULT_INITIAL_CAPACITY = 1;
     private int size = 0;
 
     public MyArrayList() {
-        this.elementData = new Object[defaultInitialCapacity];
+        this(DEFAULT_INITIAL_CAPACITY);
     }
 
     public MyArrayList(int initialCapacity) {
@@ -22,7 +22,7 @@ public class MyArrayList<K> implements MyList<K> {
 
     @Override
     public boolean add(K k) {
-        //TODO 扩容
+        checkCapacity();
         this.elementData[size++] = k;
         return true;
     }
@@ -35,6 +35,14 @@ public class MyArrayList<K> implements MyList<K> {
      * @date 2020/8/20 23:34
      */
     private void checkCapacity() {
+        if (size >= elementData.length) {
+            int newLength = size + 1;
+            Object[] newElementData = new Object[newLength];
+            for (int i = 0; i < elementData.length; i++) {
+                newElementData[i] = elementData[i];
+            }
+            elementData = newElementData;
+        }
 
     }
 
@@ -52,4 +60,5 @@ public class MyArrayList<K> implements MyList<K> {
     public void set(int index, K k) {
 
     }
+
 }
