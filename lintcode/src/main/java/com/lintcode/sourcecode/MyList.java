@@ -8,38 +8,53 @@ public interface MyList<K> {
 
     /**
      * 添加
-     * @author YL
-     * @date 2020/8/19 23:09
+     *
      * @param k 需添加的元素
      * @return boolean 成功即为true 否则反之
+     * @author YL
+     * @date 2020/8/19 23:09
      */
     public boolean add(K k);
 
     /**
-     * 删除指定位置的元素
+     * 添加元素到指定位置
+     *
+     * @param k     要添加的元素
+     * @param index 位置下标
+     * @return boolean
      * @author YL
-     * @date 2020/8/19 23:10
+     * @date 2020/9/5 11:20
+     */
+    public boolean add(int index,K k);
+
+    /**
+     * 删除指定位置的元素
+     *
      * @param index 下标位置
      * @return K
+     * @author YL
+     * @date 2020/8/19 23:10
      */
     public K remove(int index);
 
     /**
      * 删除全部元素
-     * @author YL
-     * @date 2020/8/20 23:26
+     *
      * @param
      * @return int
+     * @author YL
+     * @date 2020/8/20 23:26
      */
     public int clear();
 
     /**
      * 在指定位置添加元素
+     *
+     * @param index 下标
+     * @param k     需添加的元素
+     * @return void
      * @author YL
      * @date 2020/8/19 23:11
-     * @param index 下标
-     * @param k 需添加的元素
-     * @return void
      */
-    public void set(int index,K k);
+    public void set(int index, K k);
 }
