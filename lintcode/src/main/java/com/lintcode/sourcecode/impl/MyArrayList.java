@@ -27,6 +27,13 @@ public class MyArrayList<K> implements MyList<K> {
         return true;
     }
 
+
+    @Override
+    public boolean add(K k, int index) {
+        
+        return false;
+    }
+
     /**
      * 检查数组，判断是否需要扩容
      *
