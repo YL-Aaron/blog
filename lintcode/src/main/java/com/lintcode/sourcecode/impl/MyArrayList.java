@@ -2,14 +2,16 @@ package com.lintcode.sourcecode.impl;
 
 import com.lintcode.sourcecode.MyList;
 
+import java.util.Arrays;
+
 /**
  * @author YL
  * @date 22:39 2020/8/19
  */
 public class MyArrayList<K> implements MyList<K> {
 
-    Object[] elementData;
-    private static final int DEFAULT_INITIAL_CAPACITY = 1;
+    transient Object[] elementData;
+    private static final int DEFAULT_INITIAL_CAPACITY = 5;
     private int size = 0;
 
     public MyArrayList() {
@@ -27,11 +29,15 @@ public class MyArrayList<K> implements MyList<K> {
         return true;
     }
 
-
     @Override
-    public boolean add(K k, int index) {
-        
-        return false;
+    public boolean add(int index,K k) {
+        rangeCheckForAdd(index);
+        checkCapacity();
+        for (int i = size; i > index; i--) {
+            elementData[i] = elementData[i-1];
+        }
+        elementData[index] = k;
+        return true;
     }
 
     /**
@@ -44,13 +50,22 @@ public class MyArrayList<K> implements MyList<K> {
     private void checkCapacity() {
         if (size >= elementData.length) {
             int newLength = size + 1;
-            Object[] newElementData = new Object[newLength];
-            for (int i = 0; i < elementData.length; i++) {
-                newElementData[i] = elementData[i];
-            }
-            elementData = newElementData;
+            elementData = Arrays.copyOf(elementData, newLength);
         }
+    }
 
+    /**
+     * 数组越界检查
+     *
+     * @param index
+     * @return void
+     * @author YL
+     * @date 2020/9/5 14:43
+     */
+    private void rangeCheckForAdd(int index) {
+        if (index > size || 0 > index) {
+            throw new IndexOutOfBoundsException("数组越界了");
+        }
     }
 
     @Override
@@ -68,4 +83,12 @@ public class MyArrayList<K> implements MyList<K> {
 
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Object elementDatum : elementData) {
+            sb.append(elementDatum).append(",");
+        }
+        return sb.toString();
+    }
 }

@@ -19,13 +19,13 @@ public interface MyList<K> {
     /**
      * 添加元素到指定位置
      *
-     * @param k 元素
-     * @param index 下下表
+     * @param k     要添加的元素
+     * @param index 位置下标
      * @return boolean
      * @author YL
-     * @date 2020/8/23 21:09
+     * @date 2020/9/5 11:20
      */
-    public boolean add(K k, int index);
+    public boolean add(int index,K k);
 
     /**
      * 删除指定位置的元素
