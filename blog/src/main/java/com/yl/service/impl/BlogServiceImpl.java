@@ -34,8 +34,8 @@ public class BlogServiceImpl extends BaseServiceImpl<Blog> implements BlogServic
 
 
     @Override
-    public List<Blog> selectAll(BlogSearch sreach) {
-        return blogMapper.selectAll(sreach);
+    public List<Blog> selectAll(BlogSearch search) {
+        return blogMapper.selectAll(search);
     }
 
     @Override

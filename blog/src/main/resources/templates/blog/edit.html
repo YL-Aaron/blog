@@ -56,7 +56,8 @@
                         <input type="hidden" th:value="${null!=blog.img?blog.img:'/images/default.jpg'}" id="path"
                                name="img"/>
                         <div class="layui-upload-list">
-                            <img class="layui-upload-img" id="img" th:src="${null!=blog.img?blog.img:'/images/default.jpg'}"
+                            <img class="layui-upload-img" id="img"
+                                 th:src="${null!=blog.img?blog.img:'/images/default.jpg'}"
                                  style="width: 204px;height: 256px;border: 1px solid #ccc">
                             <p id="errorText"></p>
                         </div>
@@ -65,16 +66,16 @@
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label"></label>
-                <button class="layui-btn" lay-filter="preview" lay-submit="">预览</button>
+                <a class="layui-btn" target="_blank" th:href="@{'/admin/blog/preview?id='+${blog.id}}">预览</a>
                 <button class="layui-btn" lay-filter="save" lay-submit="">修改</button>
             </div>
         </form>
     </div>
 </div>
 <script th:inline="javascript">
-    layui.use(['form', 'layer', 'jquery','upload'],
+    layui.use(['form', 'layer', 'jquery', 'upload'],
         function () {
-            var $ = layui.jquery,form = layui.form,layer = layui.layer,upload=layui.upload;
+            var $ = layui.jquery, form = layui.form, layer = layui.layer, upload = layui.upload;
             var type;
             $.ajax({
                 url: "/type/typeDropDown",
@@ -95,7 +96,7 @@
 //图片上传
             var uploadInst = upload.render({
                 elem: '#upload',
-                url: '/admin/blog/upload',
+                url: '/admin/common/upload',
                 before: function (obj) {
                     obj.preview(function (index, file, result) {
                         $("#img").attr("src", result);
@@ -105,7 +106,7 @@
                     if (res.code === 200) {
                         $("#path").val(res.data);
                         return layer.msg(res.msg);
-                    }else {
+                    } else {
                         return layer.msg(res.msg);
                     }
                 },
@@ -150,12 +151,6 @@
                             xadmin.father_reload();
                         });
                     return false;
-                });
-            form.on('submit(preview)',
-                function (data) {
-                    $("form").attr("method", "post");
-                    $("form").attr("action", "/blog/preview");
-                    $("form").attr("target", "_blank");
                 });
         }
     );

@@ -22,19 +22,18 @@ public class AuthRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 
         return info;
     }
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        UsernamePasswordToken usernamePasswordToken= (UsernamePasswordToken) token;
-        String userName=usernamePasswordToken.getUsername();
+        UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
+        String userName = usernamePasswordToken.getUsername();
         User user = userService.login(userName);
-        String realmName=getName();
-        ByteSource salt=ByteSource.Util.bytes(user.getUsername());
-        AuthenticationInfo authcInfo=new SimpleAuthenticationInfo(user,user.getPassword(),salt,realmName);
-        return authcInfo;
+        String realmName = getName();
+        ByteSource salt = ByteSource.Util.bytes(user.getUsername());
+        return new SimpleAuthenticationInfo(user, user.getPassword(), salt, realmName);
     }
 }

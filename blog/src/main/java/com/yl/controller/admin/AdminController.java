@@ -1,5 +1,6 @@
 package com.yl.controller.admin;
 
+import com.yl.bean.ApiReturn;
 import com.yl.bean.User;
 import com.yl.service.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -12,6 +13,7 @@ import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 
@@ -24,7 +26,10 @@ import javax.annotation.Resource;
 public class AdminController {
 
     @RequestMapping("/index")
-    public String index() {
+    public String index(Model model) {
+        //获取用户信息
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        model.addAttribute("userName", user.getUsername());
         return "index";
     }
 
@@ -36,7 +41,7 @@ public class AdminController {
         String system = System.getProperty("os.name");
         String vendor = System.getProperty("java.vendor");
         model.addAttribute("userName", user.getUsername());
-        model.addAttribute("jdk",jdk);
+        model.addAttribute("jdk", jdk);
         model.addAttribute("system", system);
         model.addAttribute("vendor", vendor);
         return "welcome";
@@ -52,19 +57,21 @@ public class AdminController {
         return "login";
     }
 
+    @ResponseBody
     @PostMapping("/login")
-    public String loginUser(String userName, String password, Model model) {
+    public ApiReturn loginUser(String userName, String password) {
+        String errMsg = "";
         try {
             password = DigestUtils.md5DigestAsHex(password.getBytes());
             UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
-            model.addAttribute("userName", userName);
-            return "index";
+            return ApiReturn.success("登录成功");
         } catch (AuthenticationException e) {
-            e.printStackTrace();
+            errMsg = "帐号或密码错误";
         }
-        return "login";
+
+        return ApiReturn.fail(errMsg);
     }
 
     @GetMapping("/loginOut")

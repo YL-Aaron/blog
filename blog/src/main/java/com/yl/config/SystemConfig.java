@@ -11,10 +11,11 @@ import org.springframework.context.annotation.Configuration;
  */
 @Data
 @Configuration
-public class UploadConfig {
+public class SystemConfig {
 
     @Value("${file.img.access}")
     private String access;
     @Value("${file.img.upload}")
     private String upload;
+
 }

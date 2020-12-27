@@ -13,7 +13,7 @@
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, title, is_show,img, create_Time, update_Time
+    id, title, is_show,img,content, create_Time, update_Time
   </sql>
     <sql id="Blob_Column_List">
     content

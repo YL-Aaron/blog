@@ -1,25 +1,21 @@
 package com.yl.controller.admin;
 
-import cn.hutool.core.lang.Snowflake;
-import cn.hutool.core.util.IdUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.yl.bean.ApiReturn;
 import com.yl.bean.Blog;
 import com.yl.bean.BlogSearch;
-import com.yl.config.UploadConfig;
 import com.yl.service.BlogService;
 import com.yl.service.TypeBlogService;
 import com.yl.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,12 +35,6 @@ public class BlogController {
     @Resource
     private TypeBlogService typeBlogService;
 
-    private final UploadConfig uploadConfig;
-
-    public BlogController(UploadConfig uploadConfig) {
-        this.uploadConfig = uploadConfig;
-    }
-
 
     /**
      * 列表
@@ -56,13 +46,13 @@ public class BlogController {
      * @date 2019/12/16 10:01
      */
     @RequestMapping("/list")
-    public String list(Model model, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue ="10") Integer pageSize, BlogSearch search) {
+    public String list(Model model, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "10") Integer pageSize, BlogSearch search) {
         PageHelper.startPage(pageNum, pageSize);
         List<Blog> blogs = blogService.selectAll(search);
         PageInfo<Blog> pageInfo = new PageInfo<>(blogs);
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("search", search);
-        return "blog/list";
+        return "/blog/list";
     }
 
     /**
@@ -74,7 +64,7 @@ public class BlogController {
      */
     @RequestMapping("/add")
     public String add() {
-        return "blog/add";
+        return "/blog/add";
     }
 
 
@@ -103,23 +93,21 @@ public class BlogController {
     /**
      * 预览
      *
-     * @param title   标题
-     * @param content 内容
      * @return java.lang.String
      * @author YL
      * @date 2019/9/15 11:57
      */
     @RequestMapping("/preview")
-    public String preview(String title, String content, Model model) {
-        model.addAttribute("title", title);
-        model.addAttribute("content", content);
-        return "blog/preview";
+    public String preview(Integer id,Model model) {
+        Blog blog = blogService.selectById(id);
+        model.addAttribute("blog", blog);
+        return "/blog/preview";
     }
 
     /**
      * 编辑文章
      *
-     * @param id    主键
+     * @param id 主键
      * @return java.lang.String
      * @author YL
      * @date 2019/9/17 16:56
@@ -130,7 +118,7 @@ public class BlogController {
         List<Integer> list = typeBlogService.selectByBlogId(id);
         model.addAttribute("blog", blog);
         model.addAttribute("checked", list);
-        return "blog/edit";
+        return "/blog/edit";
     }
 
 
@@ -200,37 +188,5 @@ public class BlogController {
         return map;
     }
 
-    /**
-     * 上传图片
-     *
-     * @param file 文件流
-     * @return com.yl.bean.ApiReturn
-     * @author YL
-     * @date 2019/12/13 16:30
-     */
-    @ResponseBody
-    @RequestMapping("/upload")
-    public ApiReturn upload(MultipartFile file) {
-        if (file.isEmpty()) {
-            return new ApiReturn(500, "上传失败");
-        }
-        String fileName = file.getOriginalFilename();
-        assert fileName != null;
-        fileName = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
-        Snowflake snowflake = IdUtil.createSnowflake(1, 1);
-        long id = snowflake.nextId();
-        String newFileName = id + "." + fileName;
-        String path = uploadConfig.getUpload() + newFileName;
-        File dest = new File(path);
-        if (!dest.getParentFile().exists()) {
-            dest.getParentFile().mkdirs();
-        }
-        try {
-            file.transferTo(dest);
-            return new ApiReturn(200, "上传成功", uploadConfig.getAccess() + newFileName);
-        } catch (IOException e) {
-            log.error(e.getMessage(), "upload image error");
-        }
-        return new ApiReturn(500, "上传失败");
-    }
+
 }

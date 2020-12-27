@@ -1,6 +1,5 @@
 package com.yl.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -16,14 +15,14 @@ import java.io.File;
 @Configuration
 public class FileConfig implements WebMvcConfigurer {
 
-    private final UploadConfig uploadConfig;
+    private final SystemConfig systemConfig;
 
-    public FileConfig(UploadConfig uploadConfig) {
-        this.uploadConfig = uploadConfig;
+    public FileConfig(SystemConfig systemConfig) {
+        this.systemConfig = systemConfig;
     }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler(uploadConfig.getAccess() + "/**").addResourceLocations("file:" + uploadConfig.getUpload() + File.separator);
+        registry.addResourceHandler(systemConfig.getAccess() + "/**").addResourceLocations("file:" + systemConfig.getUpload() + File.separator);
     }
 }

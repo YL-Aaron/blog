@@ -9,6 +9,13 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
   thymeleaf:
     cache: false
+
+  redis:
+    host: localhost:6379
+    database: 1
+    timeout: 2000
+
+
 file:
   img:
     upload: f://images//

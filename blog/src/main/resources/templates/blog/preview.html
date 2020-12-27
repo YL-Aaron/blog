@@ -237,8 +237,8 @@
         src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
 <script th:inline="javascript">
     $(function () {
-        var title = [[${title}]];
-        var content = [[${content}]];
+        var title = [[${blog.title}]];
+        var content = [[${blog.content}]];
         $("h1").append(title);
         var converter = new showdown.Converter({tables:true});
         var html = converter.makeHtml(content);
