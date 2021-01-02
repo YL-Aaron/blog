@@ -19,6 +19,8 @@ public class SystemConfig {
     private String upload;
     @Value("${spring.redis.host}")
     private String host;
+    @Value("${spring.redis.port}")
+    private int port;
     @Value("${spring.redis.database}")
     private Integer database;
     @Value("${spring.redis.timeout}")

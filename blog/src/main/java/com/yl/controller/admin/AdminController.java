@@ -62,7 +62,7 @@ public class AdminController {
     public ApiReturn loginUser(String userName, String password) {
         String errMsg = "";
         try {
-            password = DigestUtils.md5DigestAsHex(password.getBytes());
+            //password = DigestUtils.md5DigestAsHex(password.getBytes());
             UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);

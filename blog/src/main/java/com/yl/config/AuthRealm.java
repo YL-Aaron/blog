@@ -33,7 +33,7 @@ public class AuthRealm extends AuthorizingRealm {
         String userName = usernamePasswordToken.getUsername();
         User user = userService.login(userName);
         String realmName = getName();
-        ByteSource salt = ByteSource.Util.bytes(user.getUsername());
-        return new SimpleAuthenticationInfo(user, user.getPassword(), salt, realmName);
+        //ByteSource salt = ByteSource.Util.bytes(user.getUsername());
+        return new SimpleAuthenticationInfo(user, user.getPassword(), null, realmName);
     }
 }

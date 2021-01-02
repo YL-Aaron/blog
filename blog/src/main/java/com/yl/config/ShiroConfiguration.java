@@ -28,7 +28,9 @@ public class ShiroConfiguration {
 
     @Bean
     public AuthRealm authRealm() {
-        return new AuthRealm();
+        AuthRealm authRealm = new AuthRealm();
+        authRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        return authRealm;
     }
 
     @Bean
@@ -37,6 +39,7 @@ public class ShiroConfiguration {
         redisManager.setHost(systemConfig.getHost());
         redisManager.setDatabase(systemConfig.getDatabase());
         redisManager.setTimeout(systemConfig.getTimeout());
+        redisManager.setPort(systemConfig.getPort());
         return redisManager;
     }
 
@@ -63,6 +66,14 @@ public class ShiroConfiguration {
         securityManager.setCacheManager(cacheManager());
         securityManager.setSessionManager(sessionManager());
         return securityManager;
+    }
+
+    @Bean
+    public CustomerMatcher hashedCredentialsMatcher() {
+        CustomerMatcher hashedCredentialsMatcher = new CustomerMatcher();
+        hashedCredentialsMatcher.setHashAlgorithmName("md5");//散列算法:这里使用MD5算法;
+        hashedCredentialsMatcher.setHashIterations(1);//散列的次数，比如散列两次，相当于 md5(md5(""));
+        return hashedCredentialsMatcher;
     }
 
     @Bean
