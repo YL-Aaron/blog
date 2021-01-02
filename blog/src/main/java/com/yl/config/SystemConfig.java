@@ -17,5 +17,10 @@ public class SystemConfig {
     private String access;
     @Value("${file.img.upload}")
     private String upload;
-
+    @Value("${spring.redis.host}")
+    private String host;
+    @Value("${spring.redis.database}")
+    private Integer database;
+    @Value("${spring.redis.timeout}")
+    private int timeout;
 }

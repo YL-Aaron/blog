@@ -4,31 +4,36 @@
     <meta charset="UTF-8">
     <title>预览</title>
     <style>
-        #title{
+        #title {
             margin: 0 auto;
         }
-        h1{
+
+        h1 {
             text-align: center;
         }
+
         /* 主页面设置*/
-        *{
+        * {
             font-size: 16px;
             font-family: 仿宋;
         }
-        body{
+
+        body {
             background-color: #FDF6E3;
             line-height: 1.5em;
             max-width: 960px;
             margin: 0 auto;
         }
+
         /* !important的作用是提高指定样式规则的应用优先权。*/
-        body>*:first-child {
+        body > *:first-child {
             margin-top: 0 !important;
         }
 
-        body>*:last-child {
+        body > *:last-child {
             margin-bottom: 0 !important;
         }
+
         /* <tt> 标签与 <code> 和 <kbd> 标签一样，<tt> 标签和必
         需的 </tt> 结束标签告诉浏览器，要把其中包含的文本显示
         为等宽字体。*/
@@ -40,17 +45,20 @@
             color: #d33682;
             margin: 0.75em;
         }
+
         h2 {
             font-size: 2.4em;
             color: #9B31EA;
             margin: 0.75em;
 
         }
+
         h3 {
             font-size: 1.8em;
             color: #338000;
             margin: 0.75em;
         }
+
         h4 {
             font-size: 1.4em;
             margin: 0.75em;
@@ -73,6 +81,7 @@
         p {
             margin-bottom: 1.5em;
         }
+
         /* hr */
         hr {
             clear: both;
@@ -84,22 +93,27 @@
             border-bottom: 4px solid #ddd;
             padding: 0;
         }
+
         /*  link*/
 
         a {
             color: #b58900;
             text-decoration: none;
         }
+
         a:focus {
             outline: thin dotted;
         }
-        a:active,a:hover {
+
+        a:active, a:hover {
             outline: 0;
         }
+
         a:hover {
             color: #cb4b16;
             text-decoration: underline;
         }
+
         a:visited {
             color: #cb4b16;
         }
@@ -110,10 +124,12 @@
         ol {
             margin: 0 0 1.5em 1.5em;
         }
+
         ol li {
             list-style-type: decimal;
             list-style-position: outside;
         }
+
         ul li {
             list-style-type: disc;
             list-style-position: outside;
@@ -126,20 +142,23 @@
             border-top-style: solid;
             border-top-color: rgb(235, 242, 224);
         }
+
         table {
             border-bottom-width: 1px;
             border-bottom-style: solid;
             border-bottom-color: rgb(235, 242, 224);
         }
-        thead,table td:nth-child(1){
-            font-weight:bold;
+
+        thead, table td:nth-child(1) {
+            font-weight: bold;
             color: #7034ca;
         }
+
         /* Padding and font style */
         table td, table th {
             padding: 5px 10px;
             font-size: 12px;
-            font-family: Verdana,serif;
+            font-family: Verdana, serif;
             color: rgb(149, 170, 109);
         }
 
@@ -147,13 +166,14 @@
         table tr:nth-child(even) {
             background: rgb(230, 238, 214)
         }
+
         table tr:nth-child(odd) {
             background: #FFF
         }
 
         /* code */
         /* =======================================*/
-        pre{
+        pre {
             border-radius: .5em;
             border: .3em solid hsl(0, 0%, 33%);
             box-shadow: 1px 1px 0.5em black inset;
@@ -177,17 +197,16 @@
             border-radius: 3px;
         }
 
-        pre>code {
+        pre > code {
             margin: 0;
             padding: 0;
             white-space: pre;
-            color: rgba(192, 192, 192, 1);/*字体颜色*/
+            color: rgba(192, 192, 192, 1); /*字体颜色*/
             font-size: 16px;
             border: none;
             background: transparent;
 
         }
-
 
 
         pre code, pre tt {
@@ -199,33 +218,39 @@
         #outline-list {
             height: 325px;
             position: fixed;
-            overflow-y:scroll;
-            overflow-x:hidden;
+            overflow-y: scroll;
+            overflow-x: hidden;
             bottom: 80px;
             right: 15px;
             width: 220px;
         }
+
         /* 设置滚动条的样式 */
         ::-webkit-scrollbar {
-            width:12px;
+            width: 12px;
         }
+
         /* 滚动槽 */
         ::-webkit-scrollbar-track {
-            -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3);
-            border-radius:10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
         }
+
         /* 滚动条滑块 */
         ::-webkit-scrollbar-thumb {
-            border-radius:10px;
-            background:rgba(0,0,0,0.1);
-            -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.5);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.1);
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
         }
+
         ::-webkit-scrollbar-thumb:window-inactive {
-            background:rgba(255,1000,0,0.4);
+            background: rgba(255, 1000, 0, 0.4);
         }
     </style>
 
     <script type="application/javascript" src="../../js/showdown.js"></script>
+    <script type="application/javascript" src="../../js/showdown-toc-min.js"></script>
+    <!--<script src="//unpkg.com/showdown-toc/dist/index.umd.min.js"></script>-->
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
 
 </head>
@@ -237,11 +262,12 @@
         src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
 <script th:inline="javascript">
     $(function () {
-        var title = [[${blog.title}]];
-        var content = [[${blog.content}]];
+        const title = [[${blog.title}]];
+        const content = [[${blog.content}]];
         $("h1").append(title);
-        var converter = new showdown.Converter({tables:true});
-        var html = converter.makeHtml(content);
+        const toc = [];
+        const converter = new showdown.Converter({tables: true, extensions: [showdownToc({toc})]});
+        const html = converter.makeHtml(content);
         document.getElementById("result").innerHTML = html;
     })
 </script>
