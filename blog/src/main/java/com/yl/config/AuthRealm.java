@@ -32,6 +32,9 @@ public class AuthRealm extends AuthorizingRealm {
         UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
         String userName = usernamePasswordToken.getUsername();
         User user = userService.login(userName);
+        if (null == user) {
+            throw new UnknownAccountException();
+        }
         String realmName = getName();
         //ByteSource salt = ByteSource.Util.bytes(user.getUsername());
         return new SimpleAuthenticationInfo(user, user.getPassword(), null, realmName);

@@ -5,6 +5,7 @@ import com.yl.bean.User;
 import com.yl.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.security.auth.login.AccountLockedException;
 
 /**
  * @author yi
@@ -67,10 +69,11 @@ public class AdminController {
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
             return ApiReturn.success("登录成功");
-        } catch (AuthenticationException e) {
+        } catch (ExcessiveAttemptsException e) {
+            errMsg = "帐号被锁定，请半小时后重试";
+        }catch (AuthenticationException e){
             errMsg = "帐号或密码错误";
         }
-
         return ApiReturn.fail(errMsg);
     }
 
