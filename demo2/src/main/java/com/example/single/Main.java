@@ -6,5 +6,15 @@ package com.example.single;
  */
 public class Main {
 
-    Huger huger = Huger.getInstance();
+    private Main() {
+    }
+
+    public static class Holder {
+        private static final Main holder = new Main();
+    }
+
+    public static Main getInstance() {
+
+        return Holder.holder;
+    }
 }
